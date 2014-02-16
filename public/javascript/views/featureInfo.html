@@ -1,19 +1,18 @@
-<div class="well col-sm-12 col-md-8 col-md-offset-2"
-     >
+<div class="well col-sm-12 col-md-8 col-md-offset-2">
   <div class="row user-row">
     <div class="col-md-1">
       <img class="img-circle"
            src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=50"
            alt="User Pic">
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8">
       <strong>{{logItem.description}}</strong><br>
-      <span class="text-muted">{{getUserName(logItem.id)}}</span>
+      <span class="text-muted">{{logItem.username}}</span>
     </div>
 
-    <div class="col-md-1">
-      <span class="emotion-icon emotion-yes">____({{logItem.yes}})</span>
-      <span class="emotion-icon emotion-no">_____({{logItem.no}})</span>
+    <div class="col-md-3">
+      <button ng-click="doLike()"><span class="emotion-icon emotion-yes"></span> ({{like}})</button>
+      <button ng-click="doDislike()"><span class="emotion-icon emotion-no"></span>({{dislike}})</button>
       <!--<img src="yes.gif">-->
       <!--<img src="no.gif">-->
     </div>

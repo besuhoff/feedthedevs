@@ -4,6 +4,7 @@
     height: 19px;
     margin: 2px 5px;
     display: block;
+    float: left;
 }
 
 .emotion-yes {
