@@ -6,6 +6,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -20,6 +21,8 @@
 
     <h1>Feed The Dev <small>for the moral of our devs</small></h1>
 
+    <h3><a href="#">GitProjectName</a></h3>
+
 
     <div class="well col-sm-12 col-md-8 col-md-offset-2"
         ng-repeat="logItem in changelog">
@@ -32,6 +35,13 @@
       <div class="col-md-10">
         <strong>{{logItem.description}}</strong><br>
         <span class="text-muted">{{getUserName(logItem.id)}}</span>
+      </div>
+
+      <div class="col-md-1">
+        <span class="emotion-icon emotion-yes">____({{logItem.yes}})</span>
+        <span class="emotion-icon emotion-no">_____({{logItem.no}})</span>
+        <!--<img src="yes.gif">-->
+        <!--<img src="no.gif">-->
       </div>
     </div>
     </div>

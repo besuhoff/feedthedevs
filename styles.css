@@ -1,0 +1,15 @@
+.emotion-icon {
+    background: url('emoticons.png') no-repeat;
+    width: 19px;
+    height: 19px;
+    margin: 2px 5px;
+    display: block;
+}
+
+.emotion-yes {
+    background-position: 0 -1711px !important;
+}
+
+.emotion-no {
+    background-position: 0 -1740px !important;
+}
