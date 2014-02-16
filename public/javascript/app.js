@@ -1,4 +1,10 @@
-window.app = angular.module('feedthedev',[]);
+window.app = angular.module('feedthedev',['pascalprecht.github-adapter']);
+
+app.config(function ($githubProvider) {
+  $githubProvider.username('stevermeistertest');
+  $githubProvider.password('4tfdcm9TCgAL');
+  $githubProvider.authType('basic');
+});
 
 app.controller('mainController', function($scope){
   $scope.changelog = [
