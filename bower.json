@@ -1,6 +1,6 @@
 {
   "name": "feedthedev",
-  "version": "0.1",
+  "version": "0.0.1",
   "devDependencies": {
     "angular-complete": "~1.0.4",
     "angular-github-adapter": "~0.1.1",
