@@ -10,6 +10,13 @@ module.exports = function(grunt) {
       }
     },
 
+    open: {
+      all: {
+        path: 'http://localhost:3000',
+        app: 'Google Chrome'
+      }
+    },
+
     copy: {
        dev: {
          files: [
@@ -30,9 +37,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-express');
+  grunt.loadNpmTasks('grunt-open');
 
   grunt.registerTask('default', ['start']);
-  grunt.registerTask('start', ['express', 'watch','express-keepalive']);
+  grunt.registerTask('start', ['express', 'open', 'watch','express-keepalive']);
   grunt.registerTask('install', ['copy', 'clean']);
 
 
