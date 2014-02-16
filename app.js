@@ -11,4 +11,8 @@ app.controller('mainController', function($scope){
       description: 'lorem ipsum2'
     }
   ];
+
+  $scope.getUserName = function(id){
+    return 'Jonh Doe';
+  }
 });

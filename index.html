@@ -20,7 +20,25 @@
 
     <h1>Feed The Dev <small>for the moral of our devs</small></h1>
 
-  </div>
+
+    <div class="well col-sm-12 col-md-8 col-md-offset-2"
+        ng-repeat="logItem in changelog">
+    <div class="row user-row">
+      <div class="col-md-1">
+        <img class="img-circle"
+             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=50"
+             alt="User Pic">
+      </div>
+      <div class="col-md-10">
+        <strong>{{logItem.description}}</strong><br>
+        <span class="text-muted">{{getUserName(logItem.id)}}</span>
+      </div>
+    </div>
+    </div>
+
+
+
+     </div>
 </div>
 
 
