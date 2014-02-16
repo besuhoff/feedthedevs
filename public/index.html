@@ -15,7 +15,6 @@
 
 
 
-
 <div class="container" ng-controller="mainController">
   <div class="center-block">
 
@@ -24,37 +23,10 @@
     <h3><a href="#">GitProjectName</a></h3>
 
 
-    <div class="well col-sm-12 col-md-8 col-md-offset-2"
-        ng-repeat="logItem in changelog">
-    <div class="row user-row">
-      <div class="col-md-1">
-        <img class="img-circle"
-             src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=50"
-             alt="User Pic">
-      </div>
-      <div class="col-md-10">
-        <strong>{{logItem.description}}</strong><br>
-        <span class="text-muted">{{getUserName(logItem.id)}}</span>
-      </div>
-
-      <div class="col-md-1">
-        <span class="emotion-icon emotion-yes">____({{logItem.yes}})</span>
-        <span class="emotion-icon emotion-no">_____({{logItem.no}})</span>
-        <!--<img src="yes.gif">-->
-        <!--<img src="no.gif">-->
-      </div>
-    </div>
-    </div>
-
-
+    <feature-info ng-repeat="logItem in changelog"></feature-info>
 
      </div>
 </div>
-
-
-
-
-
 
 
 
