@@ -11,6 +11,14 @@ app.controller('mainController', function($scope){
 
 });
 
+app.run(function($github){
+  $github.getRepo('stevermeister', 'feedthedev').then(function(data){
+    data.contents().then(function(d){
+      debugger
+    })
+  });
+})
+
 app.directive('featureInfo', function  (){
   return {
     restrict: 'E',
