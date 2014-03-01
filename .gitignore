@@ -3,3 +3,4 @@ bower_components
 node_modules
 public/javascript/libs
 public/styles/bootstrap.css
+public/javascript/templates.js

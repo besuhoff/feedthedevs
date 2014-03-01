@@ -39,6 +39,22 @@ module.exports = function(grunt) {
           message: 'Server is ready!'
         }
       }
+    },
+    html2js: {
+      options: {
+        base: 'public/javascript',
+        module: 'app-templates'
+      },
+      main: {
+        src: ['public/javascript/views/**/*.html'],
+        dest: 'public/javascript/templates.js'
+      }
+    },
+    watch: {
+      templates: {
+        files:['public/javascript/views/**/*.html'],
+        tasks: ['html2js']
+      }
     }
   });
 
@@ -48,10 +64,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-html2js');
 
   grunt.registerTask('default', ['start']);
   grunt.registerTask('start', ['express', 'notify', 'open', 'watch','express-keepalive']);
-  grunt.registerTask('install', ['copy', 'clean']);
+  grunt.registerTask('install', ['copy', 'clean', 'html2js']);
 
 
 };
