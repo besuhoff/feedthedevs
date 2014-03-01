@@ -32,18 +32,25 @@ module.exports = function(grunt) {
     },
     clean:{
       bower: ['bower_components']
+    },
+    notify: {
+      server: {
+        options: {
+          message: 'Server is ready!'
+        }
+      }
     }
   });
-
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-express');
   grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-notify');
 
   grunt.registerTask('default', ['start']);
-  grunt.registerTask('start', ['express', 'open', 'watch','express-keepalive']);
+  grunt.registerTask('start', ['express', 'notify', 'open', 'watch','express-keepalive']);
   grunt.registerTask('install', ['copy', 'clean']);
 
 
