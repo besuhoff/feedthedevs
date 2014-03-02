@@ -1,10 +1,11 @@
 module.exports = function(grunt) {
   grunt.initConfig({
 
+
     express: {
       server: {
         options: {
-          bases: ['public'],
+          server: 'server.js',
           livereload: true
         }
       }
@@ -20,7 +21,9 @@ module.exports = function(grunt) {
     copy: {
        dev: {
          files: [
-           {src: 'bower_components/angular-complete/angular.js', dest:'public/javascript/libs/angular.js'},
+           {src: 'bower_components/angular/angular.js', dest:'public/javascript/libs/angular.js'},
+           {src: 'bower_components/angular-route/angular-route.js', dest:'public/javascript/libs/angular-route.js'},
+           {src: 'bower_components/angular-sanitize/angular-sanitize.js', dest:'public/javascript/libs/angular-sanitize.js'},
            {src: 'bower_components/restangular/dist/restangular.js', dest:'public/javascript/libs/restangular.js'},
            {src: 'bower_components/jquery/dist/jquery.min.js', dest:'public/javascript/libs/jquery.min.js'},
            {src: 'bower_components/lodash/dist/lodash.min.js', dest:'public/javascript/libs/lodash.min.js'},
@@ -51,7 +54,7 @@ module.exports = function(grunt) {
     },
     watch: {
       templates: {
-        files:['public/javascript/views/**/*.html'],
+        files:['public/javascript/app/views/**/*.html'],
         tasks: ['html2js']
       }
     },

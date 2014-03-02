@@ -1,0 +1,16 @@
+<div class="container">
+
+  <div class="center-block">
+
+    <h1>Feed The Dev <small>for the moral of our devs</small></h1>
+
+    <h3>
+      <a ng-href="https://github.com/{{gitProjectAuthor}}/{{gitProjectTitle}}">{{gitProjectTitle}}</a>
+      <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}})</a></small>
+    </h3>
+
+    <feature-info ng-repeat="logItem in changelog"></feature-info>
+
+  </div>
+
+</div>

@@ -15,7 +15,8 @@
     "grunt-open": "~0.2.3",
     "grunt-notify": "~0.2.17",
     "grunt-ngmin": "0.0.3",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt-contrib-concat": "~0.3.0",
+    "express": "~3.4.8"
   },
   "scripts": {
     "start": "grunt start",

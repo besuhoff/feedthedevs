@@ -5,8 +5,8 @@
   <title>Feed The Dev</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles/bootstrap.css">
-  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="/styles/bootstrap.css">
+  <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -14,19 +14,10 @@
 <![endif]-->
 
 
+<ng-view>
 
-<div class="container" ng-controller="mainController">
-  <div class="center-block">
+</ng-view>
 
-    <h1>Feed The Dev <small>for the moral of our devs</small></h1>
-
-    <h3><a href="#">GitProjectName</a></h3>
-
-
-    <feature-info ng-repeat="logItem in changelog"></feature-info>
-
-     </div>
-</div>
 
 
 
@@ -43,17 +34,19 @@
   </div>
 </footer>
 
-<script src="javascript/libs/jquery.min.js"></script>
-<script src="javascript/libs/lodash.min.js"></script>
-<script src="javascript/libs/base64.min.js"></script>
-<script src="javascript/libs/angular.js"></script>
-<script src="javascript/libs/restangular.js"></script>
+<script src="/javascript/libs/jquery.min.js"></script>
+<script src="/javascript/libs/lodash.min.js"></script>
+<script src="/javascript/libs/base64.min.js"></script>
+<script src="/javascript/libs/angular.js"></script>
+<script src="/javascript/libs/angular-route.js"></script>
+<script src="/javascript/libs/angular-sanitize.js"></script>
+<script src="/javascript/libs/restangular.js"></script>
 
-<script src="javascript/app/app.js"></script>
-<script src="javascript/app/templates.js"></script>
-<script src="javascript/app/mainController.js"></script>
-<script src="javascript/app/featureInfoDirective.js"></script>
-<script src="javascript/app/mocks.js"></script>
+<script src="/javascript/app/app.js"></script>
+<script src="/javascript/app/templates.js"></script>
+<script src="/javascript/app/mainController.js"></script>
+<script src="/javascript/app/featureInfoDirective.js"></script>
+<script src="/javascript/app/mocks.js"></script>
 <!-- Google Analytics -->
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

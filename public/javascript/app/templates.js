@@ -1,4 +1,4 @@
-angular.module('app-templates', ['views/featureInfo.html']);
+angular.module('app-templates', ['views/featureInfo.html', 'views/init.html', 'views/main.html']);
 
 angular.module("views/featureInfo.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/featureInfo.html",
@@ -22,4 +22,30 @@ angular.module("views/featureInfo.html", []).run(["$templateCache", function($te
     "    </div>\n" +
     "  </div>\n" +
     "</div>");
+}]);
+
+angular.module("views/init.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/init.html",
+    "<h1>INIT</h1>");
+}]);
+
+angular.module("views/main.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("views/main.html",
+    "<div class=\"container\">\n" +
+    "\n" +
+    "  <div class=\"center-block\">\n" +
+    "\n" +
+    "    <h1>Feed The Dev <small>for the moral of our devs</small></h1>\n" +
+    "\n" +
+    "    <h3>\n" +
+    "      <a ng-href=\"https://github.com/{{gitProjectAuthor}}/{{gitProjectTitle}}\">{{gitProjectTitle}}</a>\n" +
+    "      <small>(by <a ng-href=\"https://github.com/{{gitProjectAuthor}}\">{{gitProjectAuthor}})</a></small>\n" +
+    "    </h3>\n" +
+    "\n" +
+    "    <feature-info ng-repeat=\"logItem in changelog\"></feature-info>\n" +
+    "\n" +
+    "  </div>\n" +
+    "\n" +
+    "</div>\n" +
+    "");
 }]);
