@@ -16,7 +16,7 @@ app.config(function($routeProvider){
     }).
     otherwise({
       templateUrl: 'views/init.html',
-      controller:  'mainController'
+      controller:  'initController'
     });
 });
 

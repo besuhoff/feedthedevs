@@ -28,7 +28,9 @@ angular.module("views/init.html", []).run(["$templateCache", function($templateC
   $templateCache.put("views/init.html",
     "<div class=\"scene\">\n" +
     "  <div class=\"input\" style=\"display: block;\">\n" +
-    "    <input type=\"text\" placeholder=\"github 'user/repo' or url\">\n" +
+    "    <form ng-submit=\"goRepo()\">\n" +
+    "      <input ng-model=\"repo\" type=\"text\" placeholder=\"github 'user/repo' or url\">\n" +
+    "    </form>\n" +
     "  </div>\n" +
     "  <div class=\"plane\">\n" +
     "  </div>\n" +

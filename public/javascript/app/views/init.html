@@ -1,6 +1,8 @@
 <div class="scene">
   <div class="input" style="display: block;">
-    <input type="text" placeholder="github 'user/repo' or url">
+    <form ng-submit="goRepo()">
+      <input ng-model="repo" type="text" placeholder="github 'user/repo' or url">
+    </form>
   </div>
   <div class="plane">
   </div>
