@@ -1,4 +1,4 @@
-window.app = angular.module('feedthedev',['pascalprecht.github-adapter']);
+window.app = angular.module('feedthedev',['app-templates','pascalprecht.github-adapter']);
 
 app.config(function ($githubProvider) {
   $githubProvider.username('stevermeistertest');

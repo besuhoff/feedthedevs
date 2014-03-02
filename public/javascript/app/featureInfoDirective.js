@@ -1,7 +1,7 @@
 app.directive('featureInfo', function  (){
   return {
     restrict: 'E',
-    templateUrl: 'javascript/views/featureInfo.html',
+    templateUrl: 'views/featureInfo.html',
     replace: true,
     link: function(scope){
       var rates = {

@@ -42,12 +42,12 @@ module.exports = function(grunt) {
     },
     html2js: {
       options: {
-        base: 'public/javascript',
+        base: 'public/javascript/app/',
         module: 'app-templates'
       },
       main: {
-        src: ['public/javascript/views/**/*.html'],
-        dest: 'public/javascript/templates.js'
+        src: ['public/javascript/app/views/**/*.html'],
+        dest: 'public/javascript/app/templates.js'
       }
     },
     watch: {
