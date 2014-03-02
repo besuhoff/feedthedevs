@@ -55,6 +55,13 @@ module.exports = function(grunt) {
         files:['public/javascript/views/**/*.html'],
         tasks: ['html2js']
       }
+    },
+    ngmin: {
+      directives: {
+        cwd: 'public/javascript/app',
+        src: ['featureInfoDirective.js'],
+        dest: 'featureInfoDirective.js'
+      }
     }
   });
 
@@ -65,6 +72,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-ngmin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('default', ['start']);
   grunt.registerTask('start', ['express', 'notify', 'open', 'watch','express-keepalive']);
