@@ -29,7 +29,7 @@ angular.module("views/init.html", []).run(["$templateCache", function($templateC
     "<div class=\"scene\">\n" +
     "  <div class=\"input\" style=\"display: block;\">\n" +
     "    <form ng-submit=\"goRepo()\">\n" +
-    "      <input ng-model=\"repo\" type=\"text\" placeholder=\"github 'user/repo' or url\">\n" +
+    "      <input ng-model=\"repo\" type=\"text\" placeholder=\"github 'user/repo'\">\n" +
     "    </form>\n" +
     "  </div>\n" +
     "  <div class=\"plane\">\n" +
@@ -43,7 +43,7 @@ angular.module("views/main.html", []).run(["$templateCache", function($templateC
     "\n" +
     "  <div class=\"center-block\">\n" +
     "\n" +
-    "    <h1>Feed The Dev <small>for the moral of our devs</small></h1>\n" +
+    "\n" +
     "\n" +
     "    <h3>\n" +
     "      <a ng-href=\"https://github.com/{{gitProjectAuthor}}/{{gitProjectTitle}}\">{{gitProjectTitle}}</a>\n" +

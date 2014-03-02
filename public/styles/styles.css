@@ -10,6 +10,10 @@ body {
     overflow: hidden;
 }
 
+header {
+    margin: 27px;
+}
+
 .emotion-icon {
     background: url('../images/emoticons.png') no-repeat;
     width: 19px;
