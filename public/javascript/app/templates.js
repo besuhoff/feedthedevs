@@ -26,7 +26,13 @@ angular.module("views/featureInfo.html", []).run(["$templateCache", function($te
 
 angular.module("views/init.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("views/init.html",
-    "<h1>INIT</h1>");
+    "<div class=\"scene\">\n" +
+    "  <div class=\"input\" style=\"display: block;\">\n" +
+    "    <input type=\"text\" placeholder=\"github 'user/repo' or url\">\n" +
+    "  </div>\n" +
+    "  <div class=\"plane\">\n" +
+    "  </div>\n" +
+    "</div>");
 }]);
 
 angular.module("views/main.html", []).run(["$templateCache", function($templateCache) {
