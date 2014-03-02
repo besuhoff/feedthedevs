@@ -1,16 +1,13 @@
-window.app = angular.module('feedthedev',['app-templates','pascalprecht.github-adapter']);
+window.app = angular.module('feedthedev',['app-templates', 'restangular']);
 
-app.config(function ($githubProvider) {
-  $githubProvider.username('stevermeistertest');
-  $githubProvider.password('4tfdcm9TCgAL');
-  $githubProvider.authType('basic');
+app.config(function () {
+//  $githubProvider.username('stevermeistertest');
+//  $githubProvider.password('4tfdcm9TCgAL');
+//  $githubProvider.authType('basic');
+ // $githubProvider.token("dea1b9ce14e9ca80fbea02d6dd8e16331bce955e")
 });
 
-app.run(function($github){
-  $github.getRepo('stevermeister', 'feedthedev').then(function(data){
-    data.contents().then(function(d){
-      debugger
-    })
-  });
+app.run(function(Restangular){
+
 })
 

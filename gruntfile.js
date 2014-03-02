@@ -21,8 +21,7 @@ module.exports = function(grunt) {
        dev: {
          files: [
            {src: 'bower_components/angular-complete/angular.js', dest:'public/javascript/libs/angular.js'},
-           {src: 'bower_components/angular-github-adapter/angular-github-adapter.js', dest:'public/javascript/libs/angular-github-adapter.js'},
-           {src: 'bower_components/angular-github-adapter/angular-github-adapter', dest:'public/javascript/libs/angular-github-adapter'},
+           {src: 'bower_components/restangular/dist/restangular.js', dest:'public/javascript/libs/restangular.js'},
            {src: 'bower_components/jquery/dist/jquery.min.js', dest:'public/javascript/libs/jquery.min.js'},
            {src: 'bower_components/lodash/dist/lodash.min.js', dest:'public/javascript/libs/lodash.min.js'},
            {src: 'bower_components/js-base64/base64.min.js', dest:'public/javascript/libs/base64.min.js'},
