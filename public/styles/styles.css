@@ -5,9 +5,8 @@ html {
 
 body {
     background-size: cover;
-
     height: 100%;
-    overflow: hidden;
+
 }
 
 header {
@@ -31,11 +30,15 @@ header {
     background-position: 0 -1740px !important;
 }
 
+.img-circle {
+    width: 75px;
+}
+
 .scene {
     position: relative;
     width: 60%;
     margin: 0 auto;
-    height: 90%;
+    height: 80%;
     -webkit-perspective: 1000px;
     -moz-perspective: 1000px;
     -o-perspective: 1000px;

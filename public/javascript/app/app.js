@@ -8,6 +8,10 @@ app.config(function ($locationProvider) {
   $locationProvider.html5Mode(true).hashPrefix('#');
 });
 
+app.config(function(RestangularProvider) {
+  RestangularProvider.setBaseUrl('https://api.github.com/');
+});
+
 app.config(function($routeProvider){
   $routeProvider.
     when('/:username/:repo', {
@@ -20,7 +24,7 @@ app.config(function($routeProvider){
     });
 });
 
-app.run(function(Restangular){
+app.run(function(){
 
 })
 
