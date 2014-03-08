@@ -1,7 +1,7 @@
 var express = require('express');
 var mysql = require('mysql');
 var app = express();
-
+var request = require('request');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -9,8 +9,24 @@ var connection = mysql.createConnection({
 });
 
 
+
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
+
+
+// proxy for github
+app.get('api/github/*', function(req,res) {
+  var options = {
+    url: 'https://api.github.com/',
+    'content-type': 'application/json',
+    headers: {
+      'User-Agent': 'request'
+    }
+  };
+
+  options.url = options.url + req.url.replace('api/github/', '');
+  request(options).pipe(res)
+});
 
 app.get('/marks', function(req, res){
   connection.query('SELECT * FROM feedthedevs.marks', function(err, rows){
@@ -42,7 +58,7 @@ app.post('/marks/:id', function(req, res){
   });
 });
 
-
+//static content
 app.all('/*', function(req, res) {
   res.sendfile('index.html', { root: __dirname+'/public' });
 });

@@ -9,7 +9,7 @@ app.config(function ($locationProvider) {
 });
 
 app.config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('https://api.github.com/');
+  RestangularProvider.setBaseUrl('http://localhost:3000/api');
 });
 
 app.config(function($routeProvider){
