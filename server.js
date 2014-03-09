@@ -16,27 +16,21 @@ app.use(express.bodyParser());
 
 app.get('/api/marks/releases/:release_id', function(req, res){
   connection.query('SELECT * FROM feedthedevs.marks_cache WHERE release_id=?',req.params.release_id, function(err, rows){
-    console.log(err);
-    res.send('marks', rows[0]);
-  });
-});
-
-app.post('/api/marks', function(req, res){
-  console.log(req.body);
-  var mark  = {user_id: 1, release_id: 547, feed: 'pizza'};
-  var query = connection.query('INSERT INTO feedthedevs.marks SET ?', mark, function(err, result) {
-    if(err){
-      res.send('error', {error : err});
+    var result = {};
+    if(rows[0]){
+      result = rows[0];
     }else{
-      res.send('result', {result : result});
+      result = {release_id: req.params.release_id, pizza: 0, tomato: 0}
+      connection.query('INSERT INTO feedthedevs.marks_cache SET ?', result);
     }
 
+    res.send('marks', result);
   });
 });
 
-app.post('/api/marks/:id', function(req, res){
-  var mark  = {user_id: 1, release_id: 547, feed: 'pizza'};
-  var query = connection.query('UPDATE feedthedevs.marks SET ? WHERE id = 9', mark, function(err, result) {
+app.post('/api/marks/releases', function(req, res){
+  console.log(req.body);
+  var query = connection.query('UPDATE feedthedevs.marks_cache SET ? WHERE release_id=' + req.body.release_id, req.body, function(err, result) {
     if(err){
       res.send('error', {error : err});
     }else{
@@ -51,6 +45,6 @@ app.all('/*', function(req, res) {
 });
 
 
-app.listen(3000);
+//app.listen(3000);
 
 module.exports = app;

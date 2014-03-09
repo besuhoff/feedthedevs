@@ -6,8 +6,4 @@ app.controller('mainController', function($scope, $routeParams, Restangular, mar
         $scope.changelog = releases;
       }
   );
-debugger
-  marksService.getMarks().then(function  (marks){
-    console.log(marks);
-  })
 });

@@ -5,8 +5,10 @@
            src="{{logItem.author.avatar_url}}"
            alt="User Pic">
       <div>
-        <span class="emotion-icon emotion-yes" ng-click="doLike()">{{like}}</span>
-        <span class="emotion-icon emotion-no" ng-click="doDislike()">{{dislike}}</span>
+        <span class="emotion-icon emotion-yes"
+              ng-click="setMark('pizza')">{{marks.pizza}}</span>
+        <span class="emotion-icon emotion-no"
+              ng-click="setMark('tomato')">{{marks.tomato}}</span>
       </div>
     </div>
     <div class="col-md-8">
