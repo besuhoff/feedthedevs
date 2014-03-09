@@ -14,27 +14,14 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
 
-// proxy for github
-app.get('api/github/*', function(req,res) {
-  var options = {
-    url: 'https://api.github.com/',
-    'content-type': 'application/json',
-    headers: {
-      'User-Agent': 'request'
-    }
-  };
-
-  options.url = options.url + req.url.replace('api/github/', '');
-  request(options).pipe(res)
-});
-
-app.get('/marks', function(req, res){
-  connection.query('SELECT * FROM feedthedevs.marks', function(err, rows){
-    res.send('marks', {marks : rows});
+app.get('/api/marks/releases/:release_id', function(req, res){
+  connection.query('SELECT * FROM feedthedevs.marks_cache WHERE release_id=?',req.params.release_id, function(err, rows){
+    console.log(err);
+    res.send('marks', rows[0]);
   });
 });
 
-app.post('/marks', function(req, res){
+app.post('/api/marks', function(req, res){
   console.log(req.body);
   var mark  = {user_id: 1, release_id: 547, feed: 'pizza'};
   var query = connection.query('INSERT INTO feedthedevs.marks SET ?', mark, function(err, result) {
@@ -47,7 +34,7 @@ app.post('/marks', function(req, res){
   });
 });
 
-app.post('/marks/:id', function(req, res){
+app.post('/api/marks/:id', function(req, res){
   var mark  = {user_id: 1, release_id: 547, feed: 'pizza'};
   var query = connection.query('UPDATE feedthedevs.marks SET ? WHERE id = 9', mark, function(err, result) {
     if(err){

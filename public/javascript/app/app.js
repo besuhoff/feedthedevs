@@ -1,15 +1,11 @@
 window.app = angular.module('feedthedev',['ngRoute', 'ngSanitize','app-templates', 'restangular']);
 
 app.config(function ($locationProvider) {
-//  $githubProvider.username('stevermeistertest');
-//  $githubProvider.password('4tfdcm9TCgAL');
-//  $githubProvider.authType('basic');
- // $githubProvider.token("dea1b9ce14e9ca80fbea02d6dd8e16331bce955e")
   $locationProvider.html5Mode(true).hashPrefix('#');
 });
 
 app.config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('http://localhost:3000/api');
+  RestangularProvider.setBaseUrl('http://localhost:3000/api/');
 });
 
 app.config(function($routeProvider){

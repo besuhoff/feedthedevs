@@ -1,11 +1,13 @@
-app.controller('mainController', function($scope, $routeParams, Restangular){
+app.controller('mainController', function($scope, $routeParams, Restangular, marksService){
   $scope.gitProjectTitle = $routeParams.repo;
   $scope.gitProjectAuthor = $routeParams.username;
-  //https://api.github.com/repos/mgonto/restangular/releases
-  Restangular.all('github').one('repos', $routeParams.username).one($routeParams.repo).getList('releases').then(
+  Restangular.allUrl('releases','https://api.github.com/repos/mgonto/restangular/releases').getList().then(
       function(releases){
-        debugger
         $scope.changelog = releases;
       }
   );
+debugger
+  marksService.getMarks().then(function  (marks){
+    console.log(marks);
+  })
 });
