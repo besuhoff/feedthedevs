@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     express: {
       server: {
         options: {
-          server: 'server.js',
+          server: 'heroku-server.js',
           port: Number(process.env.PORT || 3000)
           //livereload: true
         }
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('default', ['start']);
-  grunt.registerTask('start', ['express']);
+  grunt.registerTask('start', []);
   grunt.registerTask('dev', ['express', 'notify', 'open', 'watch','express-keepalive']);
   grunt.registerTask('install', ['copy', 'clean', 'html2js']);
 
