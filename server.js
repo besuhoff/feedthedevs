@@ -46,9 +46,4 @@ app.all('/*', function(req, res) {
 
 
 //app.listen(3000);
-var port = Number(process.env.PORT || 3000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
-
 module.exports = app;

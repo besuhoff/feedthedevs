@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           server: 'server.js',
-          port: process.env.PORT || 5000
+          port: Number(process.env.PORT || 3000)
           //livereload: true
         }
       }
