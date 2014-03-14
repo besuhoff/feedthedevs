@@ -5,8 +5,8 @@ module.exports = function(grunt) {
     express: {
       server: {
         options: {
-          server: 'server.js',
-          livereload: true
+          server: 'server.js'
+          //livereload: true
         }
       }
     },
