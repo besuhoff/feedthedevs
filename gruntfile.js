@@ -79,7 +79,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('default', ['start']);
-  grunt.registerTask('start', ['express']);
+  grunt.registerTask('start', []);
   grunt.registerTask('dev', ['express', 'notify', 'open', 'watch','express-keepalive']);
   grunt.registerTask('install', ['copy', 'clean', 'html2js']);
 
