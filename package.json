@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "author": "Stepan Suvorov",
   "license": "MIT",
-  "main": "web.js",
   "dependencies": {
     "grunt": "~0.4.2",
     "bower": "~1.2.8",
