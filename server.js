@@ -10,6 +10,10 @@ var connection = mysql.createConnection({
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
+app.get('api/github/auth', function(req, res){
+  //request to authUri = 'https://github.com/login/oauth/access_token';
+});
+
 app.get('/api/marks/releases/:release_id', function(req, res){
   connection.query('SELECT * FROM feedthedevs.marks_cache WHERE release_id=?',req.params.release_id, function(err, rows){
     var result = {};
