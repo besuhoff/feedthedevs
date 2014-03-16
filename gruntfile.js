@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     express: {
       server: {
         options: {
-          server: 'heroku-server.js',
+          server: 'server.js',
           port: Number(process.env.PORT || 3000)
           //livereload: true
         }

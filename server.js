@@ -7,11 +7,8 @@ var connection = mysql.createConnection({
   password : ''
 });
 
-
-
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
-
 
 app.get('/api/marks/releases/:release_id', function(req, res){
   connection.query('SELECT * FROM feedthedevs.marks_cache WHERE release_id=?',req.params.release_id, function(err, rows){
