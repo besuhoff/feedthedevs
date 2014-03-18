@@ -58,9 +58,9 @@ app.post('/api/marks/releases', function(req, res){
 });
 
 //static content
-//app.all('/*', function(req, res) {
-//  res.sendfile('index.html', { root: __dirname+'/public' });
-//});
+app.all('/*', function(req, res) {
+  res.sendfile('index.html', { root: __dirname+'/public' });
+});
 
 
 var port = Number(process.env.PORT || 5000);

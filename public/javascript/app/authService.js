@@ -1,7 +1,8 @@
-app.service('authService', function($window, $location, settings){
+app.service('authService', function($window, $location, Restangular, settings){
 
-  var secret,
+  var code,
       clientId = settings.githubClientId,
+      token,
   //TODO: dynamically generate to differentiate dev and prod
       redirectUri = '',
       authUri = 'https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri;
@@ -10,15 +11,16 @@ app.service('authService', function($window, $location, settings){
     $window.location.href = authUri;
   }
 
-  this.getSecret = function  (){
-    if(!secret){
-      secret = parseUrlParam($location.absUrl(), 'code');
+  this.getToken = function  (code){
+    if(!code){
+      code = parseUrlParam($location.absUrl(), 'code');
     }
-    return secret;
+    return Restangular.all('github').one('gettoken', code).get();
+    //access_token
   }
 
   this.isAuth = function (){
-    return !!this.getSecret();
+
   }
 
 });
