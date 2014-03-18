@@ -1,4 +1,5 @@
 var express = require('express');
+var request = require('request');
 var mysql = require('mysql');
 var app = express();
 var connection = mysql.createConnection({
@@ -7,11 +8,28 @@ var connection = mysql.createConnection({
   password : ''
 });
 
+var clientId = 'd2374b99ef25d506e0be';
+var clientSecret = '679bce3d161582ff4d4853f0c4b512544e9674e2';
+
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
-app.get('api/github/auth', function(req, res){
-  //request to authUri = 'https://github.com/login/oauth/access_token';
+app.get('/api/github/gettoken/:code', function(req, res){
+
+  request.post({
+    uri: 'https://github.com/login/oauth/access_token',
+    form: {
+      client_id: clientId,
+      client_secret: clientSecret,
+      code : req.params.code
+    },
+    json:true
+  }, function(err, httpResponse, body){
+    if (err) {
+      return console.error('upload failed:', err);
+    }
+    res.send(body);
+  });
 });
 
 app.get('/api/marks/releases/:release_id', function(req, res){
@@ -40,9 +58,9 @@ app.post('/api/marks/releases', function(req, res){
 });
 
 //static content
-app.all('/*', function(req, res) {
-  res.sendfile('index.html', { root: __dirname+'/public' });
-});
+//app.all('/*', function(req, res) {
+//  res.sendfile('index.html', { root: __dirname+'/public' });
+//});
 
 
 var port = Number(process.env.PORT || 5000);
