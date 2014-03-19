@@ -1,6 +1,14 @@
 module.exports = function(grunt) {
   grunt.initConfig({
 
+    migrate: {
+      options: {
+        env: {
+          DATABASE_URL: 'mysql://root:@localhost/feedthedevs'
+        },
+        verbose: true
+      }
+    },
 
     express: {
       server: {
@@ -77,6 +85,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-db-migrate');
 
   grunt.registerTask('default', ['start']);
   grunt.registerTask('start', []);

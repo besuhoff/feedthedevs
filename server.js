@@ -14,8 +14,9 @@ var clientSecret = '679bce3d161582ff4d4853f0c4b512544e9674e2';
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
-app.get('/api/github/gettoken/:code', function(req, res){
 
+//gitHub OAuth token request
+app.get('/api/github/gettoken/:code', function(req, res){
   request.post({
     uri: 'https://github.com/login/oauth/access_token',
     form: {
