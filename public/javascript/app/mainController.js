@@ -1,4 +1,9 @@
-app.controller('mainController', function($scope, $routeParams, githubService){
+app.controller('mainController', function($scope, $location, $routeParams, githubService, authService){
+
+  if(!authService.isAuth()){
+    $location.path('/auth');
+  }
+
   $scope.gitProjectTitle = $routeParams.repo;
   $scope.gitProjectAuthor = $routeParams.username;
   githubService.getReleases('mgonto', 'restangular')

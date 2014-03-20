@@ -7,14 +7,13 @@ app.controller('authController', function($scope, $location, authService){
   var code = parseUrlParam($location.absUrl(), 'code');
 
   if(code){
-    authService.getToken(code).then(function (data){
-
+    authService.getToken(code).then(function (token){
+        if(token){
+          $location.path('/init');
+        }
     });
   }
-
 });
-
-
 
 
 

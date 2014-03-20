@@ -1,5 +1,5 @@
-app.service('marksService', function(Restangular){
+app.service('marksService', function(apiService){
   this.getMarks = function (releaseId){
-    return Restangular.all('marks').one('releases', releaseId).get()
+    return apiService.all('marks').one('releases', releaseId).get()
   }
 });

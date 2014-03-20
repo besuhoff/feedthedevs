@@ -1,4 +1,4 @@
-app.service('authService', function($window, $location, Restangular, settings){
+app.service('authService', function($window, $location, $q, apiService, gitHubApiService,settings){
 
   var code,
       clientId = settings.githubClientId,
@@ -12,18 +12,17 @@ app.service('authService', function($window, $location, Restangular, settings){
   }
 
   this.getToken = function  (code){
-    if(!code){
-      return ;
-    }
-    return Restangular.all('github').one('gettoken', code).get().then(
-        function(data){
-          Restangular.setDefaultHeaders({'access_token':data.access_token})
-        }
-    );
+    return apiService.all('github').one('gettoken', code).get().then(
+              function(data){
+                token = data.access_token;
+                apiService.setDefaultHeaders({'access_token':token});
+                gitHubApiService.setDefaultRequestParams({'access_token':token});
+                return token;
+              });
   }
 
   this.isAuth = function (){
-
+    return !!token;
   }
 
 });

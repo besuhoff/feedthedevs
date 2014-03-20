@@ -5,12 +5,9 @@ app.config(function ($locationProvider) {
 });
 
 app.constant('settings', {
-  githubClientId: 'd2374b99ef25d506e0be'
-});
-
-app.config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('http://localhost:3000/api/');
-  RestangularProvider.setMethodOverriders(["put", "patch"]);
+  githubClientId: 'd2374b99ef25d506e0be',
+  apiUri: 'http://localhost:3000/api/',
+  githubApiUri: 'https://api.github.com/'
 });
 
 app.config(function($routeProvider){
