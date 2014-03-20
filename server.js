@@ -10,6 +10,7 @@ var connection = mysql.createConnection({
 
 var clientId = 'd2374b99ef25d506e0be';
 var clientSecret = '679bce3d161582ff4d4853f0c4b512544e9674e2';
+var token = ''
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
@@ -27,7 +28,29 @@ app.get('/api/github/gettoken/:code', function(req, res){
     json:true
   }, function(err, httpResponse, body){
     if (err) {
-      return console.error('upload failed:', err);
+      return console.error('request failed:', err);
+    }
+    token = body.access_token;
+    res.send(body);
+  });
+});
+
+//gitHub user info request
+app.get('/api/github/user', function(req, res){
+
+  if(!req.params.token){
+    res.send('Not authorized');
+  }
+
+  request.get({
+    uri: 'https://api.github.com/user?access_token=' + token,
+    headers: {
+      'User-Agent': 'request'
+    },
+    json:true
+  }, function(err, httpResponse, body){
+    if (err) {
+      return console.error('request failed:', err);
     }
     res.send(body);
   });
