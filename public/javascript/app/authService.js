@@ -13,10 +13,13 @@ app.service('authService', function($window, $location, Restangular, settings){
 
   this.getToken = function  (code){
     if(!code){
-      code = parseUrlParam($location.absUrl(), 'code');
+      return ;
     }
-    return Restangular.all('github').one('gettoken', code).get();
-    //access_token
+    return Restangular.all('github').one('gettoken', code).get().then(
+        function(data){
+          Restangular.setDefaultHeaders({'access_token':data.access_token})
+        }
+    );
   }
 
   this.isAuth = function (){
@@ -24,13 +27,3 @@ app.service('authService', function($window, $location, Restangular, settings){
   }
 
 });
-
-
-//TODO: think how to make github callback html5-url friendly
-function parseUrlParam(url, param){
-  var temp = url.match(param + '=(\\w*)');
-  if(!temp || !temp[1]){
-    return false;
-  }
-  return temp[1];
-}
