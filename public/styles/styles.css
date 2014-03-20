@@ -85,3 +85,7 @@ header {
 .input input:focus {
     outline: none;
 }
+
+input.git-auth {
+    background:url("/images/Github.png") no-repeat;;
+}
