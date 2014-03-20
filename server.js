@@ -43,7 +43,7 @@ app.get('/api/github/user', function(req, res){
   }
 
   request.get({
-    uri: 'https://api.github.com/user?access_token=' + token,
+    uri: 'https://api.github.com/user?access_token=' + req.params.token,
     headers: {
       'User-Agent': 'request'
     },
