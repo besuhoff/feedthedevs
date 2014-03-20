@@ -31,7 +31,7 @@ module.exports = function(grunt) {
        dev: {
          files: [
            {src: 'bower_components/angular/angular.js', dest:'public/javascript/libs/angular.js'},
-           {src: 'bower_components/angular-cookie/angular-cookie.js', dest:'public/javascript/libs/angular-cookie.js'},
+           {src: 'bower_components/angular-cookies/angular-cookies.js', dest:'public/javascript/libs/angular-cookies.js'},
            {src: 'bower_components/angular-route/angular-route.js', dest:'public/javascript/libs/angular-route.js'},
            {src: 'bower_components/angular-sanitize/angular-sanitize.js', dest:'public/javascript/libs/angular-sanitize.js'},
            {src: 'bower_components/restangular/dist/restangular.js', dest:'public/javascript/libs/restangular.js'},

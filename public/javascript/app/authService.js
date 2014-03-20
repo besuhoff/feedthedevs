@@ -1,4 +1,4 @@
-app.service('authService', function($window, $location, $q, apiService, gitHubApiService,settings){
+app.service('authService', function($window, $location, $q, $cookies, apiService, gitHubApiService,settings){
 
   var code,
       clientId = settings.githubClientId,
@@ -12,12 +12,31 @@ app.service('authService', function($window, $location, $q, apiService, gitHubAp
   }
 
   this.getToken = function  (code){
+    var defer = $q.defer();
+    if(token){
+      defer.resolve(token);
+      return defer.promise;
+    }
+    if($cookies.access_token){
+      token = $cookies.access_token;
+      defer.resolve(token);
+      return defer.promise;
+    }
+
+    return promise = this.generateToken(code).then(function(access_token){
+      debugger
+      token = access_token;
+      apiService.setDefaultHeaders({'access_token':token});
+      gitHubApiService.setDefaultRequestParams({'access_token':token});
+      return token;
+    });
+  }
+
+
+  this.generateToken = function  (code){
     return apiService.all('github').one('gettoken', code).get().then(
               function(data){
-                token = data.access_token;
-                apiService.setDefaultHeaders({'access_token':token});
-                gitHubApiService.setDefaultRequestParams({'access_token':token});
-                return token;
+                return data.access_token;
               });
   }
 

@@ -1,4 +1,4 @@
-app.controller('authController', function($scope, $location, authService){
+app.controller('authController', function($scope, $location, $cookies, authService){
 
   $scope.goGithubOauth = function (){
     authService.goGithubOauth();
@@ -6,9 +6,10 @@ app.controller('authController', function($scope, $location, authService){
 
   var code = parseUrlParam($location.absUrl(), 'code');
 
-  if(code){
+  if(code || $cookies.access_token){
     authService.getToken(code).then(function (token){
         if(token){
+          $cookies.access_token = token;
           $location.path('/init');
         }
     });

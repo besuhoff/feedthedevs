@@ -1,4 +1,4 @@
-window.app = angular.module('feedthedevs',['ngRoute', 'ngSanitize','app-templates', 'restangular']);
+window.app = angular.module('feedthedevs',['ngRoute', 'ngSanitize', 'ngCookies', 'app-templates', 'restangular']);
 
 app.config(function ($locationProvider) {
   $locationProvider.html5Mode(true).hashPrefix('#');
