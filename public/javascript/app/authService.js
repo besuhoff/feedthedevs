@@ -19,6 +19,8 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
     }
     if($cookies.access_token){
       token = $cookies.access_token;
+      apiService.setDefaultHeaders({'access_token':token});
+      gitHubApiService.setDefaultRequestParams({'access_token':token});
       defer.resolve(token);
       return defer.promise;
     }

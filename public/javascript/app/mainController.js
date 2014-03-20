@@ -14,6 +14,6 @@ app.controller('mainController', function($scope, $location, $routeParams, githu
     );
 
   githubService.getUserData().then(function(data){
-    console.log(data);
+    $scope.userData = data;
   })
 });

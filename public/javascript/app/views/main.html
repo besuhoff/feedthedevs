@@ -9,6 +9,7 @@
       <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}})</a></small>
     </h3>
 
+    <div ng-show="userData.login">Hi, {{userData.login}}!</div>
     <feature-info ng-repeat="logItem in changelog"></feature-info>
 
   </div>
