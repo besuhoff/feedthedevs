@@ -18,15 +18,17 @@ app.directive('featureInfo', function  (marksService){
 
      scope.setMark = function (feed){
        if(!scope.userVote){
-         scope.userVote = feed;
-         scope.marks[feed]++;
-         scope.marks.put();
-       }else{
-         if(scope.userVote !== feed){
+         marksService.setMark(scope.logItem.id, feed).then(function(){
            scope.userVote = feed;
            scope.marks[feed]++;
-           scope.marks[afeed(feed)]--;
-           scope.marks.put();
+         });
+       }else{
+         if(scope.userVote !== feed){
+           marksService.setMark(scope.logItem.id, feed).then(function(){
+             scope.userVote = feed;
+             scope.marks[feed]++;
+             scope.marks[afeed(feed)]--;
+           });
          }
        }
      }

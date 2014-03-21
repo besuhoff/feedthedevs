@@ -42,6 +42,13 @@ app.get('/api/github/user', function(req, res){
     res.send('Not authorized');
   }
 
+  getUser(token, function(userInfo){
+    res.send(userInfo);
+  });
+
+});
+
+function getUser(token, callback){
   request.get({
     uri: 'https://api.github.com/user?access_token=' + token,
     headers: {
@@ -52,18 +59,23 @@ app.get('/api/github/user', function(req, res){
     if (err) {
       return console.error('request failed:', err);
     }
-    res.send(body);
+    callback(body);
   });
-});
+}
 
 app.get('/api/marks/releases/:release_id', function(req, res){
-  connection.query('SELECT * FROM feedthedevs.marks_cache WHERE release_id=?',req.params.release_id, function(err, rows){
-    var result = {};
+  var sql = 'SELECT release_id, feed, count(*) as number FROM feedthedevs.marks WHERE release_id = ? GROUP BY release_id, feed ORDER BY release_id, feed';
+  connection.query(sql,req.params.release_id, function(err, rows){
+    if(err){
+      console.log(err);
+    }
+    var result = {release_id: req.params.release_id, pizza: 0, tomato: 0};
+
     if(rows[0]){
-      result = rows[0];
-    }else{
-      result = {release_id: req.params.release_id, pizza: 0, tomato: 0}
-      connection.query('INSERT INTO feedthedevs.marks_cache SET ?', result);
+      result[rows[0].feed] = rows[0].number;
+    }
+    if(rows[1]){
+      result[rows[1].feed] = rows[1].number;
     }
 
     res.send('marks', result);
@@ -71,14 +83,51 @@ app.get('/api/marks/releases/:release_id', function(req, res){
 });
 
 app.post('/api/marks/releases', function(req, res){
-  console.log(req.body);
-  var query = connection.query('UPDATE feedthedevs.marks_cache SET ? WHERE release_id=' + req.body.release_id, req.body, function(err, result) {
-    if(err){
-      res.send('error', {error : err});
-    }else{
-      res.send('result', {result : result});
-    }
+
+  var token = req.headers['access_token'];
+
+  if(!token){
+    res.send('Not authorized');
+  }
+
+  getUser(token, function(userInfo){
+    var userId = userInfo.id,
+        sql = 'select feed from feedthedevs.marks where release_id = ? AND user_id=' + userId,
+        releaseId = req.body.release_id,
+        feed = req.body.feed,
+        data = {
+          release_id : releaseId,
+          user_id: userId,
+          feed : feed
+        }
+
+    connection.query(sql, releaseId, function(err, rows) {
+      if(err){
+        console.log(err);
+      }
+
+      if(rows[0]){
+        if(rows[0].feed !== feed){
+          var sql = 'UPDATE feedthedevs.marks SET ? WHERE release_id=' + releaseId ;
+          connection.query(sql, data, function(err, result) {
+            if(err){
+              console.log(err);
+            }
+            res.send('result', {result : result});
+          });
+        }
+      }else{
+        var sql = 'INSERT INTO feedthedevs.marks SET ?';
+        connection.query(sql, data, function(err, result) {
+          if(err){
+            console.log(err);
+          }
+          res.send('result', {result : result});
+        });
+      }
+    });
   });
+
 });
 
 //static content

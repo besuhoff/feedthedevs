@@ -1,7 +1,8 @@
 window.app = angular.module('feedthedevs',['ngRoute', 'ngSanitize', 'ngCookies', 'app-templates', 'restangular']);
 
-app.config(function ($locationProvider) {
+app.config(function ($locationProvider, RestangularProvider) {
   $locationProvider.html5Mode(true).hashPrefix('#');
+  RestangularProvider.setMethodOverriders(["put", "post"]);
 });
 
 app.constant('settings', {
