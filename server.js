@@ -97,20 +97,21 @@ app.get('/api/marks/releases/:release_id', function(req, res){
     if(rows[1]){
       result[rows[1].feed] = rows[1].number;
     }
-console.log(token);
+
     getUser(token, function(userInfo){
-      console.log('2.2');
+      console.log(userInfo);
       if(!userInfo.id){
         res.send(userInfo);
         return;
       }
       var userId = userInfo.id,
           sql = 'SELECT feed FROM marks WHERE release_id = $1 and user_id = $2';
-      console.log('3');
+      console.log([releaseId, userId]);
       dbclient.query(sql,[releaseId, userId], function(err, queryResult){
         if(queryResult.rows[0]){
           result.userVote = queryResult.rows[0].feed;
         }
+        console.log(result);
         res.send('marks', result);
       });
 
