@@ -2,6 +2,9 @@ var express = require('express');
 var request = require('request');
 var pg = require('pg');
 var app = express();
+
+console.log('NODE_ENV:::::::::::: ' + process.env.NODE_ENV);
+
 //var conString = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
 //var conStringHeroku = 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com:5432/da4gu7uk0qu1eh';
 var params = {
