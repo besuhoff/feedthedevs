@@ -1,6 +1,6 @@
 {
   "name": "feedthedev",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "author": "Stepan Suvorov",
   "license": "MIT",
   "main": "server.js",
@@ -18,13 +18,12 @@
     "grunt-ngmin": "0.0.3",
     "grunt-contrib-concat": "~0.3.0",
     "express": "~3.4.8",
-    "mysql": "~2.1.0",
     "request": "~2.34.0",
     "db-migrate": "~0.6.4",
     "grunt-db-migrate": "~0.2.0",
     "async": "~0.2.10",
-    "pg": "~2.11.1",
-    "node-gyp": "~0.13.0"
+    "pg": "~2.11.1"
+//    "node-gyp": "~0.13.0"
   },
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/grunt install"

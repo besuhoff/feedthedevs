@@ -1,6 +1,5 @@
 var express = require('express');
 var request = require('request');
-var mysql = require('mysql');
 var pg = require('pg');
 var app = express();
 var conString = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
