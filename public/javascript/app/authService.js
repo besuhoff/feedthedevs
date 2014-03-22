@@ -4,7 +4,8 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
       clientId = settings.githubClientId,
       token,
   //TODO: dynamically generate to differentiate dev and prod
-      redirectUri = 'http://' + $location.host() + ':'+ $location.port() + '/auth',
+      //redirectUri = 'http://' + $location.host() + ':'+ $location.port() + '/auth',
+      redirectUri = '',
       authUri = 'https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri;
 
   this.goGithubOauth = function (){

@@ -89,3 +89,8 @@ header {
 input.git-auth {
     background:url("/images/Github.png") no-repeat;;
 }
+
+.username{
+    float: right;
+    margin-top: -97px;
+}

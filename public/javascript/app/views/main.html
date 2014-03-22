@@ -1,17 +1,13 @@
 <div class="container">
-
   <div class="center-block">
-
-
 
     <h3>
       <a ng-href="https://github.com/{{gitProjectAuthor}}/{{gitProjectTitle}}">{{gitProjectTitle}}</a>
       <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}})</a></small>
     </h3>
 
-    <div ng-show="userData.login">Hi, {{userData.login}}!</div>
+    <div class="username" ng-show="userData.login">Hi, {{userData.login}}!</div>
     <feature-info ng-repeat="logItem in changelog"></feature-info>
 
   </div>
-
 </div>
