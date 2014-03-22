@@ -5,19 +5,20 @@ var app = express();
 
 console.log('NODE_ENV:::::::::::: ' + process.env.NODE_ENV);
 
-//var conString = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
-//var conStringHeroku = 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com:5432/da4gu7uk0qu1eh';
-var params = {
-               host: 'ec2-23-23-81-171.compute-1.amazonaws.com',
-               port: 5432,
-               user: 'gfdjmxldrvrqje',
-               password: 'GsbiS8_p-GOFuFUbbrwSWwB5bd',
-               database: 'da4gu7uk0qu1eh'
-           //    ssl: true
-             };
+if(process.env.NODE_ENV === 'production'){
+  var dbConnectparams = {
+    host: 'ec2-23-23-81-171.compute-1.amazonaws.com',
+    port: 5432,
+    user: 'gfdjmxldrvrqje',
+    password: 'GsbiS8_p-GOFuFUbbrwSWwB5bd',
+    database: 'da4gu7uk0qu1eh'
+    //    ssl: true
+  };
+}else{
+  var dbConnectparams = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
+}
 
-
-var dbclient = new pg.Client(params);
+var dbclient = new pg.Client(dbConnectparams);
 dbclient.connect();
 
 var clientId = 'd2374b99ef25d506e0be';
