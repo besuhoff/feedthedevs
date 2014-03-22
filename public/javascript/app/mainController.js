@@ -6,7 +6,7 @@ app.controller('mainController', function($scope, $location, $routeParams, githu
 
   $scope.gitProjectTitle = $routeParams.repo;
   $scope.gitProjectAuthor = $routeParams.username;
-  githubService.getReleases('mgonto', 'restangular')
+  githubService.getReleases($routeParams.username, $routeParams.repo)
     .then(
         function(releases){
           $scope.changelog = releases;
