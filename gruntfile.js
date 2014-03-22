@@ -4,7 +4,8 @@ module.exports = function(grunt) {
     migrate: {
       options: {
         env: {
-          DATABASE_URL: 'mysql://root:@localhost/feedthedevs'
+          //DATABASE_URL: 'mysql://root:@localhost/feedthedevs'
+          DATABASE_URL: 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs'
         },
         verbose: true
       }
@@ -91,7 +92,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['start']);
   grunt.registerTask('start', []);
   grunt.registerTask('dev', ['express', 'notify', 'open', 'watch','express-keepalive']);
-  grunt.registerTask('install', ['copy', 'clean', 'html2js']);
+  grunt.registerTask('install', ['copy', 'clean', 'html2js', 'migrate:up']);
 
 
 };

@@ -4,6 +4,10 @@ var type = dbm.dataType;
 
 
 exports.up = function (db, callback) {
+
+  //var postgresEnum = 'CREATE TYPE feed_enum AS ENUM ("pizza", "tomato");';
+  //db.runSql(postgresEnum);
+
   async.series([
     db.createTable.bind(db, 'marks', {
       user_id: {
@@ -14,8 +18,14 @@ exports.up = function (db, callback) {
         type: 'int',
         notNull: true
       },
+      //for cross-db-compatibility switched ENUM to STRING
+      // TODO: create postgres ENUM
+//      feed: {
+//        type:'ENUM("pizza", "tomato")',
+//        notNull: true
+//      }
       feed: {
-        type:'enum("pizza", "tomato")',
+        type:'string',
         notNull: true
       }
     })

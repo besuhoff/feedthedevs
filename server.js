@@ -1,12 +1,11 @@
 var express = require('express');
 var request = require('request');
 var mysql = require('mysql');
+var pg = require('pg');
 var app = express();
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : ''
-});
+var conString = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
+var dbclient = new pg.Client(conString);
+dbclient.connect();
 
 var clientId = 'd2374b99ef25d506e0be';
 var clientSecret = '679bce3d161582ff4d4853f0c4b512544e9674e2';
@@ -64,12 +63,22 @@ function getUser(token, callback){
 }
 
 app.get('/api/marks/releases/:release_id', function(req, res){
-  var sql = 'SELECT release_id, feed, count(*) as number FROM feedthedevs.marks WHERE release_id = ? GROUP BY release_id, feed ORDER BY release_id, feed';
-  connection.query(sql,req.params.release_id, function(err, rows){
+  var token = req.headers['access_token'];
+
+  if(!token){
+    res.send('Not authorized');
+  }
+
+  var sql = 'SELECT release_id, feed, count(*) as number FROM marks WHERE release_id = $1 GROUP BY release_id, feed',
+      releaseId = req.params.release_id;
+
+  dbclient.query(sql,[releaseId], function(err, queryResult){
+
     if(err){
       console.log(err);
     }
-    var result = {release_id: req.params.release_id, pizza: 0, tomato: 0};
+    var rows = queryResult.rows;
+    var result = {release_id: req.params.release_id, pizza: 0, tomato: 0, userVote: null};
 
     if(rows[0]){
       result[rows[0].feed] = rows[0].number;
@@ -78,7 +87,21 @@ app.get('/api/marks/releases/:release_id', function(req, res){
       result[rows[1].feed] = rows[1].number;
     }
 
-    res.send('marks', result);
+    getUser(token, function(userInfo){
+      var userId = userInfo.id,
+          sql = 'SELECT feed FROM marks WHERE release_id = $1 and user_id = $2';
+
+      dbclient.query(sql,[releaseId, userId], function(err, queryResult){
+        if(queryResult.rows[0]){
+          result.userVote = queryResult.rows[0].feed;
+        }
+        res.send('marks', result);
+      });
+
+    });
+
+
+
   });
 });
 
@@ -92,37 +115,38 @@ app.post('/api/marks/releases', function(req, res){
 
   getUser(token, function(userInfo){
     var userId = userInfo.id,
-        sql = 'select feed from feedthedevs.marks where release_id = ? AND user_id=' + userId,
+        sql = 'select feed from marks where release_id = $1 AND user_id=$2',
         releaseId = req.body.release_id,
         feed = req.body.feed,
-        data = {
-          release_id : releaseId,
-          user_id: userId,
-          feed : feed
-        }
+        data = [releaseId, userId, feed];
 
-    connection.query(sql, releaseId, function(err, rows) {
+
+
+    dbclient.query(sql, [releaseId, userId], function(err, queryResult) {
       if(err){
         console.log(err);
       }
+      var rows = queryResult.rows;
 
       if(rows[0]){
         if(rows[0].feed !== feed){
-          var sql = 'UPDATE feedthedevs.marks SET ? WHERE release_id=' + releaseId ;
-          connection.query(sql, data, function(err, result) {
+          var sql = 'UPDATE marks SET user_id = $2, feed = $3 WHERE release_id=$1';
+          dbclient.query(sql, data, function(err, queryResult) {
             if(err){
               console.log(err);
             }
-            res.send('result', {result : result});
+            res.send('result', {result : queryResult});
           });
+        }else{
+          res.send('error', {error:'you have only one ' + feed + ' for the feature' });
         }
       }else{
-        var sql = 'INSERT INTO feedthedevs.marks SET ?';
-        connection.query(sql, data, function(err, result) {
+        var sql = 'INSERT INTO marks(release_id, user_id, feed) VALUES($1,$2,$3)';
+        dbclient.query(sql, data, function(err, queryResult) {
           if(err){
             console.log(err);
           }
-          res.send('result', {result : result});
+          res.send('result', {result : queryResult});
         });
       }
     });
