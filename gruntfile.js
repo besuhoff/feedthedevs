@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
   var dbs = {
-    local: 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs',
+    local: 'postgres://feedthedevs:ftdftd@localhost/feedthedevs',
     local_mysql: 'mysql://root:@localhost/feedthedevs',
     heroku: 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com:5432/da4gu7uk0qu1eh'
   };
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     migrate: {
       options: {
         env: {
-          DATABASE_URL: dbs['heroku']
+          DATABASE_URL: (process.env.NODE_ENV === 'production')?dbs['heroku']:dbs['local']
         },
         verbose: true
       }

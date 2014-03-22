@@ -3,22 +3,20 @@ var request = require('request');
 var pg = require('pg');
 var app = express();
 
-console.log('NODE_ENV:::::::::::: ' + process.env.NODE_ENV);
-
-if(process.env.NODE_ENV === 'production'){
-  var dbConnectparams = {
+if(process.env.NODE_ENV && process.env.NODE_ENV === 'production'){
+  var dbConnectParams = {
     host: 'ec2-23-23-81-171.compute-1.amazonaws.com',
     port: 5432,
     user: 'gfdjmxldrvrqje',
     password: 'GsbiS8_p-GOFuFUbbrwSWwB5bd',
     database: 'da4gu7uk0qu1eh'
-    //    ssl: true
+    //,ssl: true
   };
 }else{
-  var dbConnectparams = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
+  var dbConnectParams = 'postgres://feedthedevs:ftdftd@localhost/feedthedevs';
 }
 
-var dbclient = new pg.Client(dbConnectparams);
+var dbclient = new pg.Client(dbConnectParams);
 dbclient.connect();
 
 var clientId = 'd2374b99ef25d506e0be';
@@ -187,5 +185,4 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
-//app.listen(3000);
 module.exports = app;
