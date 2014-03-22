@@ -8,7 +8,7 @@ app.config(function ($locationProvider, RestangularProvider) {
 app.constant('settings', {
   githubClientId: 'd2374b99ef25d506e0be',
   //apiUri: 'http://localhost:3000/api/',
-  apiUri: 'http://http://feedthedevs.herokuapp.com/api/',
+  apiUri: 'http://feedthedevs.herokuapp.com/api/',
   githubApiUri: 'https://api.github.com/'
 });
 
