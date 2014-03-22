@@ -89,13 +89,13 @@ app.get('/api/marks/releases/:release_id', function(req, res){
       console.log(err);
     }
     var rows = queryResult.rows;
-    var result = {release_id: req.params.release_id, pizza: 0, tomato: 0, userVote: null};
+    var result = {release_id: releaseId, pizza: 0, tomato: 0, userVote: null};
 
     if(rows[0]){
-      result[rows[0].feed] = rows[0].number;
+      result[rows[0].feed] = parseInt(rows[0].number, 10);
     }
     if(rows[1]){
-      result[rows[1].feed] = rows[1].number;
+      result[rows[1].feed] = parseInt(rows[1].number, 10);
     }
 
     getUser(token, function(userInfo){
@@ -112,7 +112,7 @@ app.get('/api/marks/releases/:release_id', function(req, res){
           result.userVote = queryResult.rows[0].feed;
         }
         console.log(result);
-        res.send('marks', {'marks':result});
+        res.send(result);
       });
 
     });
