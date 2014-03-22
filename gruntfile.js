@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   var dbs = {
     local: 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs',
     local_mysql: 'mysql://root:@localhost/feedthedevs',
-    heroku: 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com/da4gu7uk0qu1eh'
+    heroku: 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com:5432/da4gu7uk0qu1eh'
   };
 
   grunt.initConfig({
