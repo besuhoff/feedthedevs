@@ -26,6 +26,11 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
       return defer.promise;
     }
 
+    if(!code){
+      defer.resolve(false);
+      return defer.promise;
+    }
+
     return promise = this.generateToken(code).then(function(access_token){
       token = access_token;
       apiService.setDefaultHeaders({'access_token':token});
@@ -43,7 +48,7 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
   }
 
   this.isAuth = function (){
-    return !!token;
+    return this.getToken();
   }
 
 });
