@@ -98,7 +98,8 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['start']);
   grunt.registerTask('start', []);
   grunt.registerTask('dev', ['express', 'notify', 'open', 'watch','express-keepalive']);
-  grunt.registerTask('install', ['copy', 'clean', 'html2js', 'migrate:up']);
+  //grunt.registerTask('install', ['copy', 'clean', 'html2js', 'migrate:up']);
+  grunt.registerTask('install', ['copy', 'clean', 'html2js']);
 
 
 };
