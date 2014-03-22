@@ -99,19 +99,16 @@ app.get('/api/marks/releases/:release_id', function(req, res){
     }
 
     getUser(token, function(userInfo){
-      console.log(userInfo);
       if(!userInfo.id){
         res.send(userInfo);
         return;
       }
       var userId = userInfo.id,
           sql = 'SELECT feed FROM marks WHERE release_id = $1 and user_id = $2';
-      console.log([releaseId, userId]);
       dbclient.query(sql,[releaseId, userId], function(err, queryResult){
         if(queryResult.rows[0]){
           result.userVote = queryResult.rows[0].feed;
         }
-        console.log(result);
         res.send(result);
       });
 
@@ -167,7 +164,7 @@ app.post('/api/marks/releases', function(req, res){
           if(err){
             console.log(err);
           }
-          res.send('result', {result : queryResult});
+          res.send(queryResult);
         });
       }
     });
