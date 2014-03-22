@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     migrate: {
       options: {
         env: {
-          DATABASE_URL: process.env.PORT?dbs['heroku']:dbs['local']
+          DATABASE_URL: dbs['heroku']
         },
         verbose: true
       }
