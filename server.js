@@ -124,6 +124,10 @@ app.post('/api/marks/releases', function(req, res){
   }
 
   getUser(token, function(userInfo){
+    if(!userInfo.id){
+      res.send(userInfo);
+      return;
+    }
     var userId = userInfo.id,
         sql = 'select feed from marks where release_id = $1 AND user_id=$2',
         releaseId = req.body.release_id,
