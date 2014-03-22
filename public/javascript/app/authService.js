@@ -26,7 +26,6 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
     }
 
     return promise = this.generateToken(code).then(function(access_token){
-      debugger
       token = access_token;
       apiService.setDefaultHeaders({'access_token':token});
       gitHubApiService.setDefaultRequestParams({'access_token':token});
