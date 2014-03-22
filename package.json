@@ -22,8 +22,8 @@
     "db-migrate": "~0.6.4",
     "grunt-db-migrate": "~0.2.0",
     "async": "~0.2.10",
-    "pg": "~2.11.1"
-//    "node-gyp": "~0.13.0"
+    "pg": "~2.11.1",
+    "node-gyp": "~0.13.0"
   },
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install && ./node_modules/.bin/grunt install"
