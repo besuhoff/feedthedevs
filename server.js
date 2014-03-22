@@ -81,7 +81,7 @@ app.get('/api/marks/releases/:release_id', function(req, res){
 
 
   var sql = 'SELECT release_id, feed, count(*) as number FROM marks WHERE release_id = $1 GROUP BY release_id, feed',
-      releaseId = req.params.release_id;
+      releaseId = parseInt(req.params.release_id, 10);
 
   dbclient.query(sql,[releaseId], function(err, queryResult){
 
@@ -112,7 +112,7 @@ app.get('/api/marks/releases/:release_id', function(req, res){
           result.userVote = queryResult.rows[0].feed;
         }
         console.log(result);
-        res.send('marks', result);
+        res.send('marks', {'marks':result});
       });
 
     });
