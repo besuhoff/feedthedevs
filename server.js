@@ -9,8 +9,8 @@ var params = {
                port: 5432,
                user: 'gfdjmxldrvrqje',
                password: 'GsbiS8_p-GOFuFUbbrwSWwB5bd',
-               database: 'da4gu7uk0qu1eh',
-               ssl: true
+               database: 'da4gu7uk0qu1eh'
+           //    ssl: true
              };
 
 
