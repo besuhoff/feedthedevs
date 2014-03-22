@@ -2,7 +2,8 @@ var express = require('express');
 var request = require('request');
 var pg = require('pg');
 var app = express();
-var conString = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
+//var conString = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
+var conStringHeroku = 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com/da4gu7uk0qu1eh';
 var dbclient = new pg.Client(conString);
 dbclient.connect();
 
