@@ -3,8 +3,18 @@ var request = require('request');
 var pg = require('pg');
 var app = express();
 //var conString = 'postgres://postgres:DrDkdB3tNcf8@localhost/feedthedevs';
-var conStringHeroku = 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com:5432/da4gu7uk0qu1eh';
-var dbclient = new pg.Client(conStringHeroku);
+//var conStringHeroku = 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com:5432/da4gu7uk0qu1eh';
+var params = {
+               host: 'ec2-23-23-81-171.compute-1.amazonaws.com',
+               port: 5432,
+               user: 'gfdjmxldrvrqje',
+               password: 'GsbiS8_p-GOFuFUbbrwSWwB5bd',
+               database: 'da4gu7uk0qu1eh',
+               ssl: true
+             };
+
+
+var dbclient = new pg.Client(params);
 dbclient.connect();
 
 var clientId = 'd2374b99ef25d506e0be';
