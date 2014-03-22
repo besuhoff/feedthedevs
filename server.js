@@ -78,6 +78,7 @@ app.get('/api/marks/releases/:release_id', function(req, res){
   if(!token){
     res.send('Not authorized');
   }
+  console.log('1');
 
   var sql = 'SELECT release_id, feed, count(*) as number FROM marks WHERE release_id = $1 GROUP BY release_id, feed',
       releaseId = req.params.release_id;
@@ -96,7 +97,7 @@ app.get('/api/marks/releases/:release_id', function(req, res){
     if(rows[1]){
       result[rows[1].feed] = rows[1].number;
     }
-
+    console.log('2');
     getUser(token, function(userInfo){
       if(!userInfo.id){
         res.send(userInfo);
@@ -104,7 +105,7 @@ app.get('/api/marks/releases/:release_id', function(req, res){
       }
       var userId = userInfo.id,
           sql = 'SELECT feed FROM marks WHERE release_id = $1 and user_id = $2';
-
+      console.log('3');
       dbclient.query(sql,[releaseId, userId], function(err, queryResult){
         if(queryResult.rows[0]){
           result.userVote = queryResult.rows[0].feed;
