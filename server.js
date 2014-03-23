@@ -155,10 +155,10 @@ app.post('/api/marks/releases', function(req, res){
             if(err){
               console.log(err);
             }
-            res.send('result', {result : queryResult});
+            res.send(queryResult);
           });
         }else{
-          res.send('error', {error:'you have only one ' + feed + ' for the feature' });
+          res.send({error:'you have only one ' + feed + ' for the feature' });
         }
       }else{
         var sql = 'INSERT INTO marks(release_id, user_id, feed) VALUES($1,$2,$3)';
