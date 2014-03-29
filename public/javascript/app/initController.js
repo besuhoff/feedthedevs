@@ -6,5 +6,5 @@ app.controller('initController', function($scope, $location, authService){
 
   $scope.goRepo = function (){
     $location.path('/' + $scope.repo);
-  }
+  };
 });

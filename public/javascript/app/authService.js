@@ -10,7 +10,7 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
 
   this.goGithubOauth = function (){
     $window.location.href = authUri;
-  }
+  };
 
   this.getToken = function  (code){
     var defer = $q.defer();
@@ -31,13 +31,13 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
       return defer.promise;
     }
 
-    return promise = this.generateToken(code).then(function(access_token){
+    return this.generateToken(code).then(function(access_token){
       token = access_token;
       apiService.setDefaultHeaders({'access_token':token});
       gitHubApiService.setDefaultRequestParams({'access_token':token});
       return token;
     });
-  }
+  };
 
 
   this.generateToken = function  (code){
@@ -45,10 +45,10 @@ app.service('authService', function($window, $location, $q, $cookies, apiService
               function(data){
                 return data.access_token;
               });
-  }
+  };
 
   this.isAuth = function (){
     return this.getToken();
-  }
+  };
 
 });

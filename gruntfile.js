@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     migrate: {
       options: {
         env: {
-          DATABASE_URL: (process.env.NODE_ENV === 'production')?dbs['heroku']:dbs['local']
+          DATABASE_URL: (process.env.NODE_ENV === 'production')?dbs.heroku:dbs.local
         },
         verbose: true
       }
@@ -22,7 +22,6 @@ module.exports = function(grunt) {
         options: {
           server: 'server.js',
           port: Number(process.env.PORT || 3000)
-          //livereload: true
         }
       }
     },
@@ -81,12 +80,16 @@ module.exports = function(grunt) {
         src: ['featureInfoDirective.js'],
         dest: 'featureInfoDirective.js'
       }
+    },
+    jshint: {
+      all: ['Gruntfile.js', 'public/javascript/app/**/*.js']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-express');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-notify');

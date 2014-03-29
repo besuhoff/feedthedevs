@@ -1,7 +1,7 @@
 app.service('marksService', function(apiService){
   this.getMarks = function (releaseId){
-    return apiService.all('marks').one('releases', releaseId).get()
-  }
+    return apiService.all('marks').one('releases', releaseId).get();
+  };
   this.setMark = function (releaseId, mark){
     var releases = apiService.all('marks').all('releases'),
         newMark = {
@@ -9,5 +9,5 @@ app.service('marksService', function(apiService){
                     feed: mark
                   };
     return releases.post(newMark);
-  }
+  };
 });

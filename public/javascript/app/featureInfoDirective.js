@@ -21,7 +21,7 @@ app.directive('featureInfo', function  (marksService){
        if(!scope.userVote){
          marksService.setMark(scope.logItem.id, feed).then(function(data){
            if(data.error){
-             alert(data.error);
+             window.alert(data.error);
              return;
            }
            scope.userVote = feed;
@@ -31,7 +31,7 @@ app.directive('featureInfo', function  (marksService){
          if(scope.userVote !== feed){
            marksService.setMark(scope.logItem.id, feed).then(function(data){
              if(data.error){
-               alert(data.error);
+               window.alert(data.error);
                return;
              }
              scope.userVote = feed;
@@ -40,8 +40,8 @@ app.directive('featureInfo', function  (marksService){
            });
          }
        }
-     }
+     };
 
     }
-  }
-})
+  };
+});

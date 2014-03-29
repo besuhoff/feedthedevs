@@ -1,0 +1,14 @@
+{
+  "curly": true,
+  "eqnull": true,
+  "eqeqeq": true,
+  "undef": true,
+  "globals": {
+    "jQuery": true,
+    "process": true,
+    "module": true,
+    "angular": true,
+    "app": true,
+    "window": true
+  }
+}

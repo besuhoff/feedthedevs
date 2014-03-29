@@ -15,7 +15,7 @@ app.controller('mainController', function($scope, $location, $routeParams, githu
 
       githubService.getUserData().then(function(data){
         $scope.userData = data;
-      })
+      });
     }
   });
 });

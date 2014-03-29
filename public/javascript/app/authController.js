@@ -2,7 +2,7 @@ app.controller('authController', function($scope, $location, $cookies, authServi
 
   $scope.goGithubOauth = function (){
     authService.goGithubOauth();
-  }
+  };
 
   var code = parseUrlParam($location.absUrl(), 'code');
 

@@ -1,4 +1,4 @@
-window.app = angular.module('feedthedevs',['ngRoute', 'ngSanitize', 'ngCookies', 'app-templates', 'restangular']);
+var app = angular.module('feedthedevs',['ngRoute', 'ngSanitize', 'ngCookies', 'app-templates', 'restangular']);
 
 app.config(function ($locationProvider, RestangularProvider) {
   $locationProvider.html5Mode(true).hashPrefix('#');
@@ -33,5 +33,5 @@ app.config(function($routeProvider){
 
 app.run(function(){
 
-})
+});
 
