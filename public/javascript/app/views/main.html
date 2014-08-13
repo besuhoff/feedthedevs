@@ -8,6 +8,6 @@
 
     <div class="username" ng-show="userData.login">Hi, {{userData.login}}! <a href="/unauth">Sign Out</a></div>
     <feature-info ng-repeat="logItem in changelog"></feature-info>
-
+    <p ng-hide="logItem.length" class="none">No items to display</p>
   </div>
 </div>
