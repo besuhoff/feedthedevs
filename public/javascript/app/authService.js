@@ -1,46 +1,34 @@
-app.service('authService', function($window, $location, $q, $cookies, apiService, gitHubApiService,settings){
+app.service('authService', function($location, $q, $cookies, apiService, githubService, settings){
+  'use strict';
 
-  var code,
-      clientId = settings.githubClientId,
-      token,
-  //TODO: dynamically generate to differentiate dev and prod
-      //redirectUri = 'http://' + $location.host() + ':'+ $location.port() + '/auth',
-      redirectUri = '',
-      authUri = 'https://github.com/login/oauth/authorize?client_id=' + clientId + '&redirect_uri=' + redirectUri;
+  var token;
 
   this.goGithubOauth = function (){
-    $window.location.href = authUri;
+    $location.path(settings.authUrl);
   };
 
-  this.getToken = function  (code){
-    var defer = $q.defer();
-    if(token){
-      defer.resolve(token);
-      return defer.promise;
+  this.getToken = function(code){
+    if (code) {
+      return this.generateToken(code).then(function(access_token){
+        token = access_token;
+        apiService.setDefaultHeaders({'access_token':token});
+        return token;
+      });
     }
+
     if($cookies.access_token){
       token = $cookies.access_token;
       apiService.setDefaultHeaders({'access_token':token});
-      gitHubApiService.setDefaultRequestParams({'access_token':token});
-      defer.resolve(token);
-      return defer.promise;
-    }
-
-    if(!code){
+      return githubService.getUserData().then(function(response) { return response.id !== undefined ? token : false });
+    } else {
+      var defer = $q.defer();
       defer.resolve(false);
       return defer.promise;
     }
-
-    return this.generateToken(code).then(function(access_token){
-      token = access_token;
-      apiService.setDefaultHeaders({'access_token':token});
-      gitHubApiService.setDefaultRequestParams({'access_token':token});
-      return token;
-    });
   };
 
 
-  this.generateToken = function  (code){
+  this.generateToken = function(code){
     return apiService.all('github').one('gettoken', code).get().then(
               function(data){
                 return data.access_token;

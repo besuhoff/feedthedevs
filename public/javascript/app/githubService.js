@@ -1,9 +1,14 @@
-app.service('githubService', function (gitHubApiService){
+app.service('githubService', function (apiService){
+  var cache = {};
+
   this.getReleases = function (username, repo){
-    return gitHubApiService.all('repos').all(username).all(repo).all('releases').getList();
+    if (cache[username + '/' + repo] === undefined) {
+      cache[username + '/' + repo] = apiService.all('github').all('repos').all(username).all(repo).all('releases').getList();
+    }
+    return cache[username + '/' + repo];
   };
 
   this.getUserData = function (){
-    return gitHubApiService.one('user').get();
+    return apiService.all('github').one('user').get();
   };
 });
