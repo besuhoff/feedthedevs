@@ -1,5 +1,3 @@
-'use strict';
-
 var express = require('express'),
     pg = require('pg'),
     createApi = require('./api'),
