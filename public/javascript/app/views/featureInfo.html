@@ -2,13 +2,15 @@
   <div class="row user-row">
     <div class="col-md-2">
       <img class="img-circle"
-           src="{{logItem.author.avatar_url}}"
+           ng-src="{{logItem.author.avatar_url}}"
            alt="User Pic">
-      <div>
+      <div class="marks">
+          {{marks.pizza}}
         <span class="emotion-icon emotion-yes"
-              ng-click="setMark('pizza')">{{marks.pizza}}</span>
+              ng-click="setMark('pizza')"></span>
         <span class="emotion-icon emotion-no"
-              ng-click="setMark('tomato')">{{marks.tomato}}</span>
+              ng-click="setMark('tomato')"></span>
+          {{marks.tomato}}
       </div>
     </div>
     <div class="col-md-8">

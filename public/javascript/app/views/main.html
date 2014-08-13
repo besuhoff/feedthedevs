@@ -1,9 +1,9 @@
 <div class="container">
   <div class="center-block">
 
-    <h3>
+    <h3 ng-show="gitProjectAuthor">
       <a ng-href="https://github.com/{{gitProjectAuthor}}/{{gitProjectTitle}}">{{gitProjectTitle}}</a>
-      <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}})</a></small>
+      <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}}</a>)</small>
     </h3>
 
     <div class="username" ng-show="userData.login">Hi, {{userData.login}}!</div>
