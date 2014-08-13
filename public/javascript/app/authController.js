@@ -1,8 +1,6 @@
 app.controller('authController', function($scope, $location, $cookies, authService){
 
-  $scope.goGithubOauth = function (){
-    authService.goGithubOauth();
-  };
+  $scope.goGithubOauth = authService.goGithubOauth;
 
   var code = parseUrlParam($location.absUrl(), 'code');
 
@@ -15,8 +13,6 @@ app.controller('authController', function($scope, $location, $cookies, authServi
     });
   }
 });
-
-
 
 //TODO: think how to make github callback html5-url friendly
 function parseUrlParam(url, param){

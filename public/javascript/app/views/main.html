@@ -6,7 +6,7 @@
       <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}}</a>)</small>
     </h3>
 
-    <div class="username" ng-show="userData.login">Hi, {{userData.login}}!</div>
+    <div class="username" ng-show="userData.login">Hi, {{userData.login}}! <a href="/unauth">Sign Out</a></div>
     <feature-info ng-repeat="logItem in changelog"></feature-info>
 
   </div>

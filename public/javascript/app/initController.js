@@ -1,8 +1,14 @@
 app.controller('initController', function($scope, $location, githubService, authService){
 
-  if (!authService.isAuth()) {
-    $location.path('/auth');
-  }
+  authService.isAuth().then(function(token) {
+    if (!token) {
+      $location.path('/auth');
+    }
+  });
+
+  githubService.getUserData().then(function(data){
+    $scope.userData = data;
+  });
 
   $scope.goRepo = function() {
     githubService

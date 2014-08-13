@@ -104,3 +104,24 @@ input.git-auth {
     float: right;
     margin-top: -97px;
 }
+
+.center-block {
+    margin: 20px 0 10px;
+}
+
+.center-block h3 {
+    margin: -26px 0 0;
+    line-height: 26px;
+}
+
+.center-block:after {
+    clear: both;
+    display: block;
+    content: '';
+}
+
+p.message {
+    text-align: center;
+    color: #00A200;
+    font-size: 16px;
+}

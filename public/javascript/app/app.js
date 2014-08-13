@@ -17,6 +17,10 @@ app.config(function($routeProvider){
       templateUrl: 'views/auth.html',
       controller:  'authController'
     }).
+    when('/unauth', {
+      templateUrl: 'views/auth.html',
+      controller:  'unauthController'
+    }).
     when('/auth/:code', {
       templateUrl: 'views/auth.html',
       controller:  'authController'
