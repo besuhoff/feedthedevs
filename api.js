@@ -73,13 +73,15 @@ function AppBase(self, app, settings) {
       dbclient.query(sql, [releaseId, userId], function(err, queryResult) {
         if(err){
           console.log(err);
+          res.send({ error: err });
+          return;
         }
         var rows = queryResult.rows,
             sql = '';
 
         if (rows[0]) {
           if (rows[0].feed !== feed) {
-            sql = 'UPDATE marks SET user_id = $2, feed = $3 WHERE release_id=$1';
+            sql = 'UPDATE marks SET feed = $3 WHERE user_id = $2 AND release_id=$1';
           } else {
             res.send({ error: 'you have only one ' + feed + ' for the feature' });
           }
@@ -91,8 +93,10 @@ function AppBase(self, app, settings) {
           dbclient.query(sql, data, function(err, queryResult) {
             if (err) {
               console.log(err);
+              res.send({ error: err });
+            } else {
+              res.send(queryResult);
             }
-            res.send(queryResult);
           });
         }
       });
