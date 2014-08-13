@@ -1,10 +1,10 @@
-app.service('authService', function($location, $q, $cookies, apiService, githubService, settings){
+app.service('authService', function($window, $location, $q, $cookies, apiService, githubService, settings){
   'use strict';
 
   var token;
 
   this.goGithubOauth = function (){
-    $location.path(settings.authUrl);
+    $window.location.href = settings.authUrl;
   };
 
   this.getToken = function(code){
