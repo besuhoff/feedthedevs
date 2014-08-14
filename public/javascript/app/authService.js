@@ -24,9 +24,7 @@
           return response.id !== undefined ? token : false;
         });
       } else {
-        var defer = $q.defer();
-        defer.resolve(false);
-        return defer.promise;
+        return $q.when(false);
       }
     };
 

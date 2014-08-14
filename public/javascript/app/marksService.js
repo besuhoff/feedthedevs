@@ -1,12 +1,14 @@
 (function() {
   'use strict';
-  app.service('marksService', function(apiService){
-    this.getMarks = function (releaseId){
-      return apiService.all('marks').one('releases', releaseId).get();
+  app.service('marksService', function(apiService) {
+    var releases = apiService.all('marks').all('releases');
+
+    this.getMarks = function(releaseId) {
+      return releases.get(releaseId);
     };
-    this.setMark = function (releaseId, mark){
-      var releases = apiService.all('marks').all('releases'),
-          newMark = {
+
+    this.setMark = function(releaseId, mark) {
+      var newMark = {
                       release_id : releaseId,
                       feed: mark
                     };

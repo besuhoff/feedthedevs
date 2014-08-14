@@ -13,16 +13,18 @@
     });
 
     $scope.goRepo = function () {
+      var parts = $scope.repo.split('/'),
+          user = parts[0],
+          repo = parts[1];
+
       githubService
-          .getReleases.apply(githubService, $scope.repo.split('/'))
-          .then(
-          function () {
+          .getReleases(user, repo)
+          .then(function () {
             $location.path('/' + $scope.repo);
-          },
-          function () {
+          })
+          .catch(function() {
             alert('User or repository not found!');
-          }
-      );
+          });
     };
   });
 })();
