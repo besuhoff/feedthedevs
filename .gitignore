@@ -4,3 +4,4 @@ node_modules
 public/javascript/libs
 public/styles/bootstrap.css
 public/javascript/app/templates.js
+config.js

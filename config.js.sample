@@ -1,0 +1,6 @@
+module.exports = {
+  devMode: true, // true, false
+  dbConnectParams: 'postgres://user:pass@server/dbname',
+  clientId: 'githubApiClientId',
+  clientSecret: 'githubApiClientSecret'
+};

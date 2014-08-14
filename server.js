@@ -1,23 +1,9 @@
 var express = require('express'),
+    config = require('./config'),
     pg = require('pg'),
-    createApi = require('./api'),
-    devMode = !process.env.NODE_ENV || process.env.NODE_ENV !== 'production',
-    dbConnectParams = {};
+    createApi = require('./api');
 
-if (!devMode) {
-  dbConnectParams = {
-    host: 'ec2-23-23-81-171.compute-1.amazonaws.com',
-    port: 5432,
-    user: 'gfdjmxldrvrqje',
-    password: 'GsbiS8_p-GOFuFUbbrwSWwB5bd',
-    database: 'da4gu7uk0qu1eh'
-    //,ssl: true
-  };
-} else {
-  dbConnectParams = 'postgres://feedthedevs:ftdftd@localhost/feedthedevs';
-}
-
-var dbclient = new pg.Client(dbConnectParams);
+var dbclient = new pg.Client(config.dbConnectParams);
 dbclient.connect();
 
 var app = express();
@@ -25,10 +11,10 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(express.bodyParser());
 
-createApi(app, devMode, {
+createApi(app, config.devMode, {
   dbclient: dbclient,
-  clientId: 'd2374b99ef25d506e0be',
-  clientSecret: '679bce3d161582ff4d4853f0c4b512544e9674e2'
+  clientId: config.clientId,
+  clientSecret: config.clientSecret
 });
 
 //static content
