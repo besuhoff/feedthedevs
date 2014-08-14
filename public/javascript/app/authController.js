@@ -18,10 +18,8 @@
 
   //TODO: think how to make github callback html5-url friendly
   function parseUrlParam(url, param){
-    var temp = url.match(param + '=(\\w*)');
-    if(!temp || !temp[1]){
-      return false;
-    }
-    return temp[1];
+    var temp = url.match(param + '=([^&#]*)');
+    // Will return null for non-existing values. Probably better than false.
+    return temp && temp[1];
   }
 })();
