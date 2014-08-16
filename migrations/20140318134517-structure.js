@@ -33,9 +33,9 @@ exports.up = function (db, callback) {
 
 exports.down = function (db, callback) {
   async.series([
+    db.removeIndex.bind('marks', 'usermark'),
     db.dropTable.bind(db, 'marks', {
       ifExists: true
     }),
-    db.removeIndex('marks', 'usermark'),
   ], callback);
 };
