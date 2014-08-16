@@ -5,7 +5,7 @@
 
     this.getContributions = function (username, repo) {
       if (cache[username + '/' + repo] === undefined) {
-        cache[username + '/' + repo] = apiService.all('github').all('repos').all(username).all(repo).all('pulls').getList();
+        cache[username + '/' + repo] = apiService.all('github').all('repos').all(username).all(repo).all('pulls').getList({ "state": "all" });
       }
       return cache[username + '/' + repo];
     };
