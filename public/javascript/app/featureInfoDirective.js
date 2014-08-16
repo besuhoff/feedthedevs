@@ -15,33 +15,22 @@
          }
        });
 
-       function afeed(feed){
+       function afeed(feed) {
          return (feed === 'pizza') ? 'tomato': 'pizza';
        }
 
-       scope.setMark = function (feed){
-         if(!scope.userVote){
-           marksService.setMark(scope.logItem.id, feed).then(function(data){
-             if(data.error){
-               window.alert(data.error);
-               return;
-             }
-             scope.userVote = feed;
-             scope.marks[feed]++;
-           });
-         }else{
-           if(scope.userVote !== feed){
-             marksService.setMark(scope.logItem.id, feed).then(function(data){
-               if(data.error){
-                 window.alert(data.error);
-                 return;
-               }
-               scope.userVote = feed;
-               scope.marks[feed]++;
-               scope.marks[afeed(feed)]--;
-             });
+       scope.setMark = function(feed) {
+         marksService.setMark(scope.logItem.id, feed).then(function(data) {
+           if(data.error) {
+             window.alert(data.error);
+             return;
            }
-         }
+           if(scope.userVote && scope.userVote !== feed) {
+             scope.marks[afeed(feed)]--;
+           }
+           scope.marks[feed]++;
+           scope.userVote = feed;
+         });
        };
 
       }
