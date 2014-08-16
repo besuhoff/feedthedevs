@@ -77,8 +77,8 @@ module.exports = function(grunt) {
     ngmin: {
       directives: {
         cwd: 'public/javascript/app',
-        src: ['featureInfoDirective.js'],
-        dest: 'featureInfoDirective.js'
+        src: ['contributionInfoDirective.js'],
+        dest: 'contributionInfoDirective.js'
       }
     },
     jshint: {

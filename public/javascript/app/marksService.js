@@ -1,18 +1,18 @@
 (function() {
   'use strict';
   app.service('marksService', function(apiService) {
-    var releases = apiService.all('marks').all('releases');
+    var contributions = apiService.all('marks').all('contributions');
 
-    this.getMarks = function(releaseId) {
-      return releases.get(releaseId);
+    this.getMarks = function(contribId) {
+      return contributions.get(contribId);
     };
 
-    this.setMark = function(releaseId, mark) {
+    this.setMark = function(contribId, mark) {
       var newMark = {
-                      release_id : releaseId,
+                      contrib_id : contribId,
                       feed: mark
                     };
-      return releases.post(newMark);
+      return contributions.post(newMark);
     };
   });
 })();

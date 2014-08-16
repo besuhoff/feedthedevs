@@ -100,21 +100,21 @@ input.git-auth {
     background:url("/images/Github.png") left center no-repeat;
 }
 
-.username{
+.control-panel .username{
     float: right;
     margin-top: -97px;
 }
 
-.center-block {
+.control-panel {
     margin: 20px 0 10px;
 }
 
-.center-block h3 {
+.control-panel h3 {
     margin: -26px 0 0;
     line-height: 26px;
 }
 
-.center-block:after {
+.control-panel:after {
     clear: both;
     display: block;
     content: '';
@@ -131,4 +131,31 @@ p.none {
     font-size: 200%;
     padding: 20px 0;
     color: #ccc;
+}
+
+.contribution .sidebar {
+    text-align: center;
+}
+
+.contribution .body h4 {
+    margin: 0 0 4px;
+    font-weight: bold;
+}
+
+.contribution .body .content {
+    margin-top: 1em;
+}
+
+.contribution .username {
+    font-weight: bold;
+    display: block;
+    color: #555;
+}
+
+.contribution .avatar {
+    margin: 6px 0 0;
+}
+
+.contribution .marks {
+    padding: 4px 0;
 }

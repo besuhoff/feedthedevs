@@ -1,0 +1,24 @@
+<div class="contribution well col-sm-12 col-md-8 col-md-offset-2">
+  <div class="row user-row">
+    <div class="col-md-2 sidebar">
+      <a class="username" href="{{logItem.user.html_url}}">{{logItem.user.login}}
+        <img class="avatar img-circle"
+             ng-src="{{logItem.user.avatar_url}}"
+             alt="User Pic">
+      </a>
+      <div class="marks">
+          {{marks.pizza}}
+        <span class="emotion-icon emotion-yes"
+              ng-click="setMark('pizza')"></span>
+        <span class="emotion-icon emotion-no"
+              ng-click="setMark('tomato')"></span>
+          {{marks.tomato}}
+      </div>
+    </div>
+    <div class="col-md-8 body">
+      <h4><a href="{{logItem.html_url}}">{{logItem.title|nl2br}}</a></h4>
+      <small>{{logItem.created_at|date}} | State: <strong>{{logItem.state}}</strong></small>
+      <p class="content" ng-bind-html="logItem.body|nl2br"></p>
+    </div>
+  </div>
+</div>

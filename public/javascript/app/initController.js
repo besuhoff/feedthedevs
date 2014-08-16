@@ -18,7 +18,7 @@
           repo = parts[1];
 
       githubService
-          .getReleases(user, repo)
+          .getContributions(user, repo)
           .then(function () {
             $location.path('/' + $scope.repo);
           })

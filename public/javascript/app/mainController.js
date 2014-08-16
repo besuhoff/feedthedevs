@@ -7,10 +7,10 @@
         $location.path('/auth');
       } else {
         githubService
-            .getReleases($routeParams.username, $routeParams.repo)
+            .getContributions($routeParams.username, $routeParams.repo)
             .then(
-            function (releases) {
-              $scope.changelog = releases;
+            function (contributions) {
+              $scope.changelog = contributions;
               $scope.gitProjectTitle = $routeParams.repo;
               $scope.gitProjectAuthor = $routeParams.username;
             },

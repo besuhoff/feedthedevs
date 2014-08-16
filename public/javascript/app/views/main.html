@@ -1,14 +1,14 @@
 <div class="container">
-  <div class="center-block">
-
+  <div class="center-block control-panel">
     <h3 ng-show="gitProjectAuthor">
       <a ng-href="https://github.com/{{gitProjectAuthor}}/{{gitProjectTitle}}">{{gitProjectTitle}}</a>
       <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}}</a>)</small>
     </h3>
+      <div class="username" ng-show="userData.login">Hi, {{userData.login}}! <a href="/unauth">Sign Out</a></div>
   </div>
+
   <div class="center-block">
-    <div class="username" ng-show="userData.login">Hi, {{userData.login}}! <a href="/unauth">Sign Out</a></div>
-    <feature-info ng-repeat="logItem in changelog"></feature-info>
+    <contribution-info ng-repeat="logItem in changelog"></contribution-info>
     <p ng-hide="changelog.length" class="none">No items to display</p>
   </div>
 </div>

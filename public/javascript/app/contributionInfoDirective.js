@@ -1,9 +1,9 @@
 (function() {
   'use strict';
-  app.directive('featureInfo', function  (marksService){
+  app.directive('contributionInfo', function  (marksService){
     return {
       restrict: 'E',
-      templateUrl: 'views/featureInfo.html',
+      templateUrl: 'views/contributionInfo.html',
       replace: true,
       link: function(scope){
 

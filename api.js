@@ -5,7 +5,7 @@ function AppBase(self, app, settings) {
   var wrapper = self,
       dbclient = settings.dbclient;
 
-  app.get('/api/marks/releases/:release_id', function (req, res) {
+  app.get('/api/marks/contributions/:contrib_id', function (req, res) {
     var token = req.headers.access_token;
 
     if (!token) {
@@ -13,16 +13,16 @@ function AppBase(self, app, settings) {
     }
 
 
-    var sql = 'SELECT release_id, feed, count(*) as number FROM marks WHERE release_id = $1 GROUP BY release_id, feed',
-        releaseId = parseInt(req.params.release_id, 10);
+    var sql = 'SELECT contrib_id, feed, count(*) as number FROM marks WHERE contrib_id = $1 GROUP BY contrib_id, feed',
+        contribId = parseInt(req.params.contrib_id, 10);
 
-    dbclient.query(sql, [releaseId], function (err, queryResult) {
+    dbclient.query(sql, [contribId], function (err, queryResult) {
 
       if (err) {
         console.log(err);
       }
       var rows = queryResult.rows;
-      var result = {release_id: releaseId, pizza: 0, tomato: 0, userVote: null};
+      var result = {contrib_id: contribId, pizza: 0, tomato: 0, userVote: null};
 
       for (var i in [0, 1]) {
         if (rows[i]) {
@@ -36,9 +36,9 @@ function AppBase(self, app, settings) {
           return;
         }
         var userId = userInfo.id,
-            sql = 'SELECT feed FROM marks WHERE release_id = $1 and user_id = $2';
+            sql = 'SELECT feed FROM marks WHERE contrib_id = $1 and user_id = $2';
 
-        dbclient.query(sql, [releaseId, userId], function (err, queryResult) {
+        dbclient.query(sql, [contribId, userId], function (err, queryResult) {
           if (queryResult.rows[0]) {
             result.userVote = queryResult.rows[0].feed;
           }
@@ -50,7 +50,7 @@ function AppBase(self, app, settings) {
     });
   });
 
-  app.post('/api/marks/releases', function (req, res) {
+  app.post('/api/marks/contributions', function (req, res) {
 
     var token = req.headers.access_token;
 
@@ -64,12 +64,12 @@ function AppBase(self, app, settings) {
         return;
       }
       var userId = userInfo.id,
-          sql = 'select feed from marks where release_id = $1 AND user_id=$2',
-          releaseId = req.body.release_id,
+          sql = 'select feed from marks where contrib_id = $1 AND user_id=$2',
+          contribId = req.body.contrib_id,
           feed = req.body.feed,
-          data = [releaseId, userId, feed];
+          data = [contribId, userId, feed];
 
-      dbclient.query(sql, [releaseId, userId], function (err, queryResult) {
+      dbclient.query(sql, [contribId, userId], function (err, queryResult) {
         if (err) {
           console.log(err);
           res.send({ error: err });
@@ -80,12 +80,12 @@ function AppBase(self, app, settings) {
 
         if (rows[0]) {
           if (rows[0].feed !== feed) {
-            sql = 'UPDATE marks SET feed = $3 WHERE user_id = $2 AND release_id=$1';
+            sql = 'UPDATE marks SET feed = $3 WHERE user_id = $2 AND contrib_id=$1';
           } else {
-            res.send({ error: 'you have only one ' + feed + ' for the feature' });
+            res.send({ error: 'You have only one ' + feed + ' for this contribution' });
           }
         } else {
-          sql = 'INSERT INTO marks(release_id, user_id, feed) VALUES($1,$2,$3)';
+          sql = 'INSERT INTO marks(contrib_id, user_id, feed) VALUES($1,$2,$3)';
         }
 
         if (sql !== '') {
