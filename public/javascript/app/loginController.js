@@ -8,7 +8,7 @@
       return authService.goGithubOauth();
     };
 
-    var code = parseUrlParam($location.absUrl(), 'code');
+    var code = $location.search()['code'];
 
     authService.isAuth(code).then(function(){
       delete $location.$$search.code;
@@ -17,11 +17,4 @@
       $scope.hideForm = false;
     });
   });
-
-  //TODO: think how to make github callback html5-url friendly
-  function parseUrlParam(url, param){
-    var temp = url.match(param + '=([^&#]*)');
-    // Will return null for non-existing values. Probably better than false.
-    return temp && temp[1];
-  }
 })();
