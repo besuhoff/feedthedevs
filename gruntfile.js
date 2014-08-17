@@ -1,17 +1,20 @@
-module.exports = function(grunt) {
+var config = require('./config.defaults.js'),
+    extend = require('extend');
 
-  var dbs = {
-    local: 'postgres://feedthedevs:ftdftd@localhost/feedthedevs',
-    local_mysql: 'mysql://root:@localhost/feedthedevs',
-    heroku: 'postgres://gfdjmxldrvrqje:GsbiS8_p-GOFuFUbbrwSWwB5bd@ec2-23-23-81-171.compute-1.amazonaws.com:5432/da4gu7uk0qu1eh'
-  };
+try {
+  extend(config, require('./config'))
+} catch(e) {
+
+}
+
+module.exports = function(grunt) {
 
   grunt.initConfig({
 
     migrate: {
       options: {
         env: {
-          DATABASE_URL: (process.env.NODE_ENV === 'production')?dbs.heroku:dbs.local
+          DATABASE_URL: config.dbConnectParams
         },
         verbose: true
       }

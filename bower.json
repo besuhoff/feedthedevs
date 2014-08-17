@@ -1,6 +1,6 @@
 {
   "name": "feedthedev",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "devDependencies": {
     "bootstrap": "~3.1.1",
     "lodash": "~2.4.1",
