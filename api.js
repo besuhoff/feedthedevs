@@ -94,7 +94,7 @@ function AppBase(self, app, settings) {
         if (sql !== '') {
           dbclient.query(sql, data, function (err, queryResult) {
             if (err) {
-              console.log(err);
+              console.log('request failed:', err);
               res.send(500, { error: err });
             } else {
               res.send(queryResult);
@@ -149,7 +149,7 @@ function AppProd(app, settings) {
     }, function (err, httpResponse, body) {
       if (err) {
         console.error('request failed:', err);
-        res.send(500, err)
+        res.send(500, { error: err });
         return;
       }
       res.send(body);
@@ -167,6 +167,7 @@ function AppProd(app, settings) {
       if (err) {
         console.error('request failed:', err);
         callback(false);
+        return;
       }
       callback(body);
     });
@@ -217,6 +218,7 @@ function AppDev(app, settings) {
       if (err) {
         console.error('request failed:', err);
         callback(false);
+        return;
       }
 
       if (queryResult.rows[0]) {
@@ -235,7 +237,9 @@ function AppDev(app, settings) {
 
     dbclient.query(sql, function (err, queryResult) {
       if (err) {
-        console.log(err);
+        console.log('request failed:', err);
+        res.send(500, { error: err })
+        return;
       }
 
       if (queryResult.rows[0]) {
