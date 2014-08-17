@@ -2,16 +2,6 @@
   'use strict';
   app.controller('initController', function ($scope, $location, githubService, authService) {
 
-    authService.isAuth().then(function (token) {
-      if (!token) {
-        $location.path('/auth');
-      }
-    });
-
-    githubService.getUserData().then(function (data) {
-      $scope.userData = data;
-    });
-
     $scope.goRepo = function () {
       var parts = $scope.repo.split('/'),
           user = parts[0],

@@ -1,10 +1,9 @@
 <div class="container">
-  <div class="center-block control-panel">
-    <h3 ng-show="gitProjectAuthor">
+  <div class="center-block">
+    <h3 class="project-author" ng-show="gitProjectAuthor">
       <a ng-href="https://github.com/{{gitProjectAuthor}}/{{gitProjectTitle}}">{{gitProjectTitle}}</a>
       <small>(by <a ng-href="https://github.com/{{gitProjectAuthor}}">{{gitProjectAuthor}}</a>)</small>
     </h3>
-      <div class="username" ng-show="userData.login">Hi, {{userData.login}}! <a href="/unauth">Sign Out</a></div>
   </div>
 
   <div class="center-block">

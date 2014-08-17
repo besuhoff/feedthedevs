@@ -1,7 +1,7 @@
 <div class="scene">
   <div class="input" style="display: block;">
-      <p ng-show="message" class="message">{{message}}</p>
-    <form ng-submit="goGithubOauth()">
+      <p ng-show="logoutMessage" class="message">{{logoutMessage}}</p>
+    <form ng-submit="goGithubOauth()" ng-hide="hideForm">
       <input class="git-auth" type="submit" value="Authorize with GitHub">
     </form>
   </div>

@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    padding: 27px;
+    padding: 27px 27px 21px;
 }
 
 header h1 {
@@ -100,24 +100,12 @@ input.git-auth {
     background:url("/images/Github.png") left center no-repeat;
 }
 
-.control-panel .username{
-    float: right;
-    margin-top: -97px;
-}
-
 .control-panel {
-    margin: 20px 0 10px;
+    text-align: right;
 }
 
-.control-panel h3 {
-    margin: -26px 0 0;
-    line-height: 26px;
-}
-
-.control-panel:after {
-    clear: both;
-    display: block;
-    content: '';
+.project-author {
+    margin: 0 0 10px;
 }
 
 p.message {

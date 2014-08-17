@@ -15,16 +15,12 @@
   app.config(function($routeProvider){
     $routeProvider.
       when('/auth', {
-        templateUrl: 'views/auth.html',
-        controller:  'authController'
-      }).
-      when('/unauth', {
-        templateUrl: 'views/auth.html',
-        controller:  'unauthController'
+        templateUrl: 'views/login.html',
+        controller:  'loginController'
       }).
       when('/auth/:code', {
-        templateUrl: 'views/auth.html',
-        controller:  'authController'
+        templateUrl: 'views/login.html',
+        controller:  'loginController'
       }).
       when('/:username/:repo', {
         templateUrl: 'views/main.html',

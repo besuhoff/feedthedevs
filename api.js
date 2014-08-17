@@ -9,7 +9,8 @@ function AppBase(self, app, settings) {
     var token = req.headers.access_token;
 
     if (!token) {
-      res.send('Not authorized');
+      res.send(401, 'Not authorized');
+      return;
     }
 
 
@@ -32,7 +33,7 @@ function AppBase(self, app, settings) {
 
       wrapper._getUser(token, function (userInfo) {
         if (!userInfo.id) {
-          res.send(userInfo);
+          res.send(401, 'Not authorized');
           return;
         }
         var userId = userInfo.id,
@@ -55,14 +56,16 @@ function AppBase(self, app, settings) {
     var token = req.headers.access_token;
 
     if (!token) {
-      res.send('Not authorized');
+      res.send(401, 'Not authorized');
+      return;
     }
 
     wrapper._getUser(token, function (userInfo) {
       if (!userInfo.id) {
-        res.send(userInfo);
+        res.send(401, 'Not authorized');
         return;
       }
+
       var userId = userInfo.id,
           sql = 'select feed from marks where contrib_id = $1 AND user_id=$2',
           contribId = req.body.contrib_id,
@@ -92,7 +95,7 @@ function AppBase(self, app, settings) {
           dbclient.query(sql, data, function (err, queryResult) {
             if (err) {
               console.log(err);
-              res.send({ error: err });
+              res.send(500, { error: err });
             } else {
               res.send(queryResult);
             }
@@ -109,11 +112,16 @@ function AppBase(self, app, settings) {
     var token = req.headers.access_token;
 
     if (!token) {
-      res.send('Not authorized');
+      res.send(401, 'Not authorized');
+      return;
     }
 
     wrapper._getUser(token, function (userInfo) {
-      res.send(userInfo);
+      if (!userInfo) {
+        res.send(401, 'Not authorized');
+      } else {
+        res.send(userInfo);
+      }
     });
 
   });
@@ -140,7 +148,9 @@ function AppProd(app, settings) {
       json: true
     }, function (err, httpResponse, body) {
       if (err) {
-        return console.error('request failed:', err);
+        console.error('request failed:', err);
+        res.send(500, err)
+        return;
       }
       res.send(body);
     });
@@ -155,7 +165,8 @@ function AppProd(app, settings) {
       json: true
     }, function (err, httpResponse, body) {
       if (err) {
-        return console.error('request failed:', err);
+        console.error('request failed:', err);
+        callback(false);
       }
       callback(body);
     });
@@ -178,7 +189,9 @@ function AppDev(app, settings) {
   app.get('/api/github/gettoken/:code', function (req, res) {
     var err = false;
     if (err) {
-      return console.error('request failed:', err);
+      console.error('request failed:', err);
+      res.send(500, { error: err })
+      return;
     }
 
     var body = {
@@ -193,7 +206,8 @@ function AppDev(app, settings) {
   this._getUser = function (token, callback) {
     var err = false;
     if (err) {
-      return console.error('request failed:', err);
+      console.error('request failed:', err);
+      callback(false);
     }
 
     var body = {},
@@ -201,13 +215,15 @@ function AppDev(app, settings) {
 
     dbclient.query(sql, [token], function (err, queryResult) {
       if (err) {
-        return console.error('request failed:', err);
+        console.error('request failed:', err);
+        callback(false);
       }
 
       if (queryResult.rows[0]) {
         callback(queryResult.rows[0]);
       } else {
-        return console.error('request failed: user not found');
+        console.error('request failed: user not found');
+        callback(false);
       }
     });
 
@@ -226,7 +242,9 @@ function AppDev(app, settings) {
         authUri += '?code=' + queryResult.rows[0].code;
 
       } else {
-        return console.error('request failed: user not found');
+        console.error('request failed: user not found');
+        res.send(500, { error: err })
+        return;
       }
       res.redirect(authUri);
     });
