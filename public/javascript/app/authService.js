@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  app.service('authService', function ($rootScope, $window, $location, $q, $cookies, apiService, githubService, settings) {
+  app.service('authService', function ($rootScope, $window, $location, $q, $cookieStore, apiService, githubService, settings) {
 
     var token;
 
@@ -11,7 +11,7 @@
     this.isAuth = function (code) {
       var saveToken = function(access_token) {
         token = access_token;
-        $cookies.access_token = token;
+        $cookieStore.put('access_token', token);
         apiService.setDefaultHeaders({'access_token': token});
         return githubService.getUserData().then(function(data) {
           if (data.id !== undefined) {
@@ -27,8 +27,8 @@
         return this.generateToken(code).then(saveToken);
       }
 
-      if ($cookies.access_token) {
-        return saveToken($cookies.access_token);
+      if ($cookieStore.get('access_token')) {
+        return saveToken($cookieStore.get('access_token'));
       } else {
         return $q.reject(false);
       }
@@ -36,7 +36,7 @@
 
     this.unAuth = function() {
       token = undefined;
-      delete $cookies.access_token;
+      $cookieStore.remove('access_token');
       apiService.setDefaultHeaders({});
       $rootScope.userData = {};
       return $q.when(true);
