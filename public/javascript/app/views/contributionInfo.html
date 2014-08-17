@@ -6,19 +6,18 @@
              ng-src="{{logItem.user.avatar_url}}"
              alt="User Pic">
       </a>
-      <div class="marks">
-          {{marks.pizza}}
-        <span class="emotion-icon emotion-yes"
-              ng-click="setMark('pizza')"></span>
-        <span class="emotion-icon emotion-no"
-              ng-click="setMark('tomato')"></span>
-          {{marks.tomato}}
-      </div>
     </div>
     <div class="col-md-8 body">
       <h4><a href="{{logItem.html_url}}">{{logItem.title|nl2br}}</a></h4>
       <small>{{logItem.created_at|date}} | State: <strong>{{logItem.state}}</strong></small>
       <p class="content" ng-bind-html="logItem.body|nl2br"></p>
+      <div class="marks">
+        Feed <a href="{{logItem.html_url}}" class="username">{{logItem.user.login}}</a>:
+
+      <span ng-repeat="feed in ['pizza', 'tomato']" class="emotion-icon emotion-{{feed}}"
+            ng-click="setMark(feed)" title="{{labels[feed]}}">
+        <span class="quantity">{{marks[feed]}}</span>
+      </span>
     </div>
   </div>
 </div>

@@ -1,6 +1,10 @@
 (function() {
   'use strict';
   app.controller('mainController', function ($scope, $location, $routeParams, githubService, authService) {
+    $scope.labels = {
+      'pizza': 'Hot juicy pizza',
+      'tomato': 'Rotten tomato'
+    };
 
     githubService
         .getContributions($routeParams.username, $routeParams.repo)

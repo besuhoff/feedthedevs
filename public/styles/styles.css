@@ -19,21 +19,22 @@ header h1 {
 }
 
 .emotion-icon {
-    background: url('../images/emoticons.png') no-repeat;
-    width: 19px;
-    height: 19px;
+    width: 20px;
+    height: 20px;
     margin: 2px 5px;
+    text-align: center;
     display: inline-block;
-    vertical-align: -7px;
+    vertical-align: top;
+    padding-top: 20px;
     cursor: pointer;
 }
 
-.emotion-yes {
-    background-position: 0 -1711px !important;
+.emotion-pizza {
+    background: url('../images/pizza.png') no-repeat;
 }
 
-.emotion-no {
-    background-position: 0 -1740px !important;
+.emotion-tomato {
+    background: url('../images/tomato.png') no-repeat;
 }
 
 .img-circle {
@@ -136,8 +137,11 @@ p.none {
 
 .contribution .username {
     font-weight: bold;
-    display: block;
     color: #555;
+}
+
+.contribution .sidebar .username {
+    display: block;
 }
 
 .contribution .avatar {
