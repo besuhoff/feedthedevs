@@ -1,7 +1,14 @@
 var express = require('express'),
-    config = require('./config'),
+    extend = require('extend'),
+    config = require('./config.defaults.js'),
     pg = require('pg'),
     createApi = require('./api');
+
+try {
+  extend(config, require('./config'))
+} catch(e) {
+
+}
 
 var dbclient = new pg.Client(config.dbConnectParams);
 dbclient.connect();
