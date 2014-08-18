@@ -2,17 +2,14 @@
   'use strict';
   app.service('authService', function ($rootScope, $window, $location, $q, $cookieStore, apiService, githubService, settings) {
 
-    var token;
-
     this.goGithubOauth = function () {
       $window.location.href = settings.authUrl;
     };
 
-    this.isAuth = function (code) {
+    this.authenticate = function (code) {
       var saveToken = function(access_token) {
-        token = access_token;
-        $cookieStore.put('access_token', token);
-        apiService.setDefaultHeaders({'access_token': token});
+        $cookieStore.put('access_token', access_token);
+        apiService.setDefaultHeaders({'access_token': access_token});
         return githubService.getUserData().then(function(data) {
           if (data.id !== undefined) {
             $rootScope.userData = data;
@@ -34,8 +31,7 @@
       }
     };
 
-    this.unAuth = function() {
-      token = undefined;
+    this.logout = function() {
       $cookieStore.remove('access_token');
       apiService.setDefaultHeaders({});
       $rootScope.userData = {};

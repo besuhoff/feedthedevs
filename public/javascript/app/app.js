@@ -23,8 +23,8 @@
         controller:  'loginController'
       }).
       when('/:username/:repo', {
-        templateUrl: 'views/main.html',
-        controller:  'mainController'
+        templateUrl: 'views/contributions.html',
+        controller:  'contributionsController'
       }).
       otherwise({
         templateUrl: 'views/init.html',

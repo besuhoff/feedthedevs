@@ -9,15 +9,13 @@
   <link rel="stylesheet" href="/styles/styles.css">
   <link href="/feedthedevs.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
-<body>
+<body ng-controller="mainController as mainCtrl">
 <!--[if lt IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 <header class="row">
     <h1 class="col-xs-8">Feed The Devs<small> for the moral of our devs <sup>beta</sup></small></h1>
-    <div class="col-xs-4 control-panel" ng-controller="layoutController">
-        <control-panel></control-panel>
-    </div>
+    <control-panel></control-panel>
 </header>
 <ng-view></ng-view>
 
@@ -45,8 +43,8 @@
 
 <script src="/javascript/app/app.js"></script>
 <script src="/javascript/app/templates.js"></script>
-<script src="/javascript/app/layoutController.js"></script>
 <script src="/javascript/app/mainController.js"></script>
+<script src="/javascript/app/contributionsController.js"></script>
 <script src="/javascript/app/initController.js"></script>
 <script src="/javascript/app/loginController.js"></script>
 <script src="/javascript/app/contributionInfoDirective.js"></script>

@@ -10,7 +10,7 @@
 
     var code = $location.search()['code'];
 
-    authService.isAuth(code).then(function(){
+    authService.authenticate(code).then(function(){
       delete $location.$$search.code;
       $location.path('/init');
     }).catch(function() {
