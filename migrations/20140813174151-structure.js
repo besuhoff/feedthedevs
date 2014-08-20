@@ -23,14 +23,14 @@ exports.up = function(db, callback) {
     db.insert.bind(db, 'dev_users', ['id', 'code', 'login'], [-1, '2ea115a53f064e7484097b67fdf4f3d5', 'Developer One']),
     db.insert.bind(db, 'dev_users', ['id', 'code', 'login'], [-2, '85e009307d400406d893307bc90da514', 'Developer Two']),
     db.insert.bind(db, 'dev_users', ['id', 'code', 'login'], [-3, '6f3e01c0fc42738ed46ef46989ac34a7', 'Developer Three']),
-    db.addIndex.bind('dev_users', 'userid', ['id'], true),
+    db.addIndex.bind(db, 'dev_users', 'userid', ['id'], true),
   ], callback);
 };
 
 
 exports.down = function (db, callback) {
   async.series([
-    db.removeIndex.bind('dev_users', 'userid'),
+    db.removeIndex.bind(db, 'dev_users', 'userid'),
     db.dropTable.bind(db, 'dev_users', {
       ifExists: true
     }),
