@@ -20,7 +20,7 @@ function AppBase(self, app, settings) {
     dbclient.query(sql, [contribId], function (err, queryResult) {
 
       if (err) {
-        console.log(err);
+//        console.log(err);
       }
       var rows = queryResult.rows;
       var result = {contrib_id: contribId, pizza: 0, tomato: 0, userVote: null};
@@ -74,7 +74,7 @@ function AppBase(self, app, settings) {
 
       dbclient.query(sql, [contribId, userId], function (err, queryResult) {
         if (err) {
-          console.log(err);
+//          console.log(err);
           res.send({ error: err });
           return;
         }
@@ -94,7 +94,7 @@ function AppBase(self, app, settings) {
         if (sql !== '') {
           dbclient.query(sql, data, function (err, queryResult) {
             if (err) {
-              console.log('request failed:', err);
+//              console.log('request failed:', err);
               res.send(500, { error: err });
             } else {
               res.send(queryResult);
@@ -128,7 +128,12 @@ function AppBase(self, app, settings) {
 
   self._proxy = function (req, res) {
     var url = 'https://api.github.com' + req.url.replace('/api/github/', '/');
-    req.pipe(request(url)).pipe(res);
+    var apiReq = request(url, {
+      headers: { 'Authorization': 'token ' + req.headers.access_token }
+    });
+
+//    console.log(apiReq);
+    req.pipe(apiReq).pipe(res);
   };
 }
 
@@ -148,7 +153,7 @@ function AppProd(app, settings) {
       json: true
     }, function (err, httpResponse, body) {
       if (err) {
-        console.error('request failed:', err);
+//        console.error('request failed:', err);
         res.send(500, { error: err });
         return;
       }
@@ -165,7 +170,7 @@ function AppProd(app, settings) {
       json: true
     }, function (err, httpResponse, body) {
       if (err) {
-        console.error('request failed:', err);
+//        console.error('request failed:', err);
         callback(false);
         return;
       }
@@ -174,7 +179,7 @@ function AppProd(app, settings) {
   };
 
   app.get('/api/github/oauth', function (req, res) {
-    var authUri = 'https://github.com/login/oauth/authorize?client_id=' + settings.clientId + '&redirect_uri=';
+    var authUri = 'https://github.com/login/oauth/authorize?client_id=' + settings.clientId + '&scope=repo&redirect_uri=';
     res.redirect(authUri);
   });
 
@@ -190,7 +195,7 @@ function AppDev(app, settings) {
   app.get('/api/github/gettoken/:code', function (req, res) {
     var err = false;
     if (err) {
-      console.error('request failed:', err);
+//      console.error('request failed:', err);
       res.send(500, { error: err })
       return;
     }
@@ -207,7 +212,7 @@ function AppDev(app, settings) {
   this._getUser = function (token, callback) {
     var err = false;
     if (err) {
-      console.error('request failed:', err);
+//      console.error('request failed:', err);
       callback(false);
     }
 
@@ -216,7 +221,7 @@ function AppDev(app, settings) {
 
     dbclient.query(sql, [token], function (err, queryResult) {
       if (err) {
-        console.error('request failed:', err);
+//        console.error('request failed:', err);
         callback(false);
         return;
       }
@@ -224,7 +229,7 @@ function AppDev(app, settings) {
       if (queryResult.rows[0]) {
         callback(queryResult.rows[0]);
       } else {
-        console.error('request failed: user not found');
+//        console.error('request failed: user not found');
         callback(false);
       }
     });
@@ -237,7 +242,7 @@ function AppDev(app, settings) {
 
     dbclient.query(sql, function (err, queryResult) {
       if (err) {
-        console.log('request failed:', err);
+//        console.log('request failed:', err);
         res.send(500, { error: err })
         return;
       }
@@ -246,7 +251,7 @@ function AppDev(app, settings) {
         authUri += '?code=' + queryResult.rows[0].code;
 
       } else {
-        console.error('request failed: user not found');
+//        console.error('request failed: user not found');
         res.send(500, { error: err })
         return;
       }
