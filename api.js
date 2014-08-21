@@ -20,7 +20,8 @@ function AppBase(self, app, settings) {
     dbclient.query(sql, [contribId], function (err, queryResult) {
 
       if (err) {
-//        console.log(err);
+        res.send(500, { error: err });
+        return;
       }
       var rows = queryResult.rows;
       var result = {contrib_id: contribId, pizza: 0, tomato: 0, userVote: null};
@@ -74,7 +75,6 @@ function AppBase(self, app, settings) {
 
       dbclient.query(sql, [contribId, userId], function (err, queryResult) {
         if (err) {
-//          console.log(err);
           res.send({ error: err });
           return;
         }
@@ -94,7 +94,6 @@ function AppBase(self, app, settings) {
         if (sql !== '') {
           dbclient.query(sql, data, function (err, queryResult) {
             if (err) {
-//              console.log('request failed:', err);
               res.send(500, { error: err });
             } else {
               res.send(queryResult);
@@ -132,7 +131,6 @@ function AppBase(self, app, settings) {
       headers: { 'Authorization': 'token ' + req.headers.access_token }
     });
 
-//    console.log(apiReq);
     req.pipe(apiReq).pipe(res);
   };
 }
@@ -153,7 +151,6 @@ function AppProd(app, settings) {
       json: true
     }, function (err, httpResponse, body) {
       if (err) {
-//        console.error('request failed:', err);
         res.send(500, { error: err });
         return;
       }
@@ -170,7 +167,6 @@ function AppProd(app, settings) {
       json: true
     }, function (err, httpResponse, body) {
       if (err) {
-//        console.error('request failed:', err);
         callback(false);
         return;
       }
@@ -187,7 +183,6 @@ function AppProd(app, settings) {
 }
 
 function AppDev(app, settings) {
-  //TODO
   AppDev.prototype = new AppBase(this, app, settings);
   var dbclient = settings.dbclient;
 
@@ -195,7 +190,6 @@ function AppDev(app, settings) {
   app.get('/api/github/gettoken/:code', function (req, res) {
     var err = false;
     if (err) {
-//      console.error('request failed:', err);
       res.send(500, { error: err })
       return;
     }
@@ -212,8 +206,8 @@ function AppDev(app, settings) {
   this._getUser = function (token, callback) {
     var err = false;
     if (err) {
-//      console.error('request failed:', err);
       callback(false);
+      return;
     }
 
     var body = {},
@@ -221,7 +215,6 @@ function AppDev(app, settings) {
 
     dbclient.query(sql, [token], function (err, queryResult) {
       if (err) {
-//        console.error('request failed:', err);
         callback(false);
         return;
       }
@@ -229,7 +222,6 @@ function AppDev(app, settings) {
       if (queryResult.rows[0]) {
         callback(queryResult.rows[0]);
       } else {
-//        console.error('request failed: user not found');
         callback(false);
       }
     });
@@ -242,7 +234,6 @@ function AppDev(app, settings) {
 
     dbclient.query(sql, function (err, queryResult) {
       if (err) {
-//        console.log('request failed:', err);
         res.send(500, { error: err })
         return;
       }
@@ -251,7 +242,6 @@ function AppDev(app, settings) {
         authUri += '?code=' + queryResult.rows[0].code;
 
       } else {
-//        console.error('request failed: user not found');
         res.send(500, { error: err })
         return;
       }
